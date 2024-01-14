@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Details</title>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" integrity="sha512-b2QcS5SsA8tZodcDtGRELiGv5SaKSk1vDHDaQRda0htPYWZ6046lr3kJ5bAAQdpV2mmA/4v0wQF9MyU6/pDIAg==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="/css/customOYAstyle.css">
+    <link rel="stylesheet" href="/css/public.css">
+    <link rel="stylesheet" href="productDetails.css">
+</head>
+
+<body>
+    <!-- start loading -->
+    <div class="overlay-loading">
+        <img src="/images/loading.gif" width="70" />
+    </div>
+
+    <!-- show slider image -->
+    <div class="show-slider-image">
+        <div class="center">
+            <img src="assets/images/Product-inside.png" alt="slider">
+        </div>
+        <button class="previous-btn slider-control-btn">
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <button class="next-btn slider-control-btn">
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
+    </div>
+
+    <section id="header" class="header">
+        <header class="header">
+            <div class="navbar">
+                <div id="logo"><a href="/"><img src="/images/logo1.png" alt="" style="width: 100px;height:70px;"></a>
+                </div>
+                <div class="navbar-list">
+                    <div class="navbar-account">
+                        <div class="account-img">
+                            <img src="/public/images/avatar.png" alt="profile">
+                        </div>
+                        <div class="account-details">
+                            <div class="account-details dropdown">
+
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="navbar-list-items">
+                        <li class="navbar-list-item">
+                            <a href="/ecommerce/shopping/whishlistCart"><i class="fa-regular fa-heart"></i></a>
+                            <span class="badge-item" id="favBadge">0</span>
+                        </li>
+                        <li class="navbar-list-item">
+                            <a href="/ecommerce/shopping/shoppingCart"><i class="fa-brands fa-shopify"></i></a>
+                            <span class="badge-item" id="cartBagBadge">0</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+    </section>
+
+    <div class="container">
+        <div class="card">
+            <h5 class="card-title d-flex justify-content-between align-items-center">
+                <div class="main-title d-flex justify-content-center align-items-center" style="font-size: 16px;">
+                    <span class="main-title-icon" style="margin-right:10px;">
+                        <span class="material-icons-sharp">
+                            store
+                        </span>
+                    </span>
+                    Products Details
+                </div>
+            </h5>
+            <div class="card-body" style="margin: 30px 20px;">
+                <div class="container">
+                    <div class="product-details-container">
+                        <div class="product-covers">
+                            <!-- small image -->
+                            <div class="small">
+                                <ul class="small-images-list">
+                                    <!-- small images will rendered here by javascript -->
+                                </ul>
+                            </div>
+                            <div class="preview bg-danger">
+                                <div class="preview-overlay">
+                                    <span>
+                                        <i class="fa-regular fa-eye"></i>
+                                    </span>
+                                </div>
+                                <img id="previewImage" src="assets/images/Product-inside.png" alt="preview">
+                            </div>
+                        </div>
+                        <div class="product-information">
+                            <!-- product name.. -->
+                            <h4 class="product-name" style="font-size: 22px; padding: 10px 0px; font-weight: 500;">
+                                <!-- product name will rendered here by javascript -->
+                            </h4>
+                            <!-- product category -->
+                            <span class="product-category">
+                                <!-- product category will rendered here by javascript -->
+                            </span>
+                            <br>
+                            <div class="stock-and-rating">
+                                <span class="product-stock">In Stock</span>
+                                <span class="product-rating">
+                                    <!-- rating will rendered here by javascript... -->
+                                </span>
+                                <!-- status handled here by javascript... -->
+                                <span class="product-status"></span>
+                            </div>
+                            <div class="product-description"></div>
+                            <div class="product-pricing">
+                                <div class="product-price">
+                                    <span class="current-price">Price: </span><span><span class="price-val"></span>
+                                        <span style="color: darkgreen;"> EPG</span></span>
+                                </div>
+                                <span class="product-discount">
+                                    <!-- rendered by javascript -->
+                                </span>
+                                <span class="product-discount-percentage">
+                                    <!-- rendered by javascript -->
+                                </span>
+                            </div>
+                            <div class="product-other">
+                                <p class="product-Quantity">Product Quantity : <span class="current-quantity"></span>
+                                    piece</p>
+                                <div class="product-action-details">
+                                    <!--createAt rendered here by javascript -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- related Products  -->
+                    <div class="related-products-container">
+                        <div class="wrapper">
+                            <div class="section-info">
+                                <h4 class="section-name">
+                                    <span class="section-icon">
+                                        <i class="fa-solid fa-tag"></i>
+                                    </span>
+                                    Products
+                                </h4>
+                                <h2 class="txt-section">
+                                    Browse Related products
+                                    <div class="carrousel-related-control">
+                                        <i id="left" class="fa-solid fa-angle-left"></i>
+                                        <i id="right" class="fa-solid fa-angle-right"></i>
+                                    </div>
+                                </h2>
+                            </div>
+                            <ul class="carousel">
+                                <li class="card">
+                                    <div class="twoIcons">
+                                        <p class="iconOnImage"><a href="#"><i class="fa-regular fa-heart"></i></a></p>
+                                        <hr>
+                                        <p class="iconOnImage"><a href="#"><i class="fa-brands fa-shopify"></i></a></p>
+                                    </div>
+                                    <div class="img"><img src="../../imgs/category-main-1.jpg" alt="img"
+                                            draggable="false"></div>
+                                    <div class="descOfProduct">
+                                        <p class="productCategory">Headphones</p>
+                                        <p class="productName">Galaxy Tab S6 Lite 10.4-inch Android Tablet 128GB.</p>
+                                        <div class="rating">
+                                            <div class="rating-container">
+
+                                            </div>
+                                            <span class="rating-value"></span>
+                                        </div>
+                                        <p class="productPrice">$189.00</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- end related Products -->
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="product-description-tab">
+                    <ul class="product-description-tab-list">
+                        <li class="active" data-id="tabProductDescription">Description</li>
+                        <li data-id="tabProductOther">Review</li>
+                    </ul>
+                    <div class="tab-container active" id="tabProductDescription" style="background-color: #F6F7F791;">
+                        <!-- rendered here by javascript -->
+                    </div>
+                    <div class="tab-container" id="tabProductOther" style="background-color: #F6F7F791;">
+                        <div class="container">
+                            <form method="post" id="reviewForm" class="review-form">
+                                <div class="rating-information">
+                                    <h3 class="review-product">Review <span class="review-Product-name">LapTop Hp</span>
+                                        </h5>
+                                        <p class="current-Rating">current rating: <span
+                                                class="current-Rating-stars"></span></p>
+                                </div>
+                                <span class="text-danger" id="validationReviewSpan"
+                                    style="display: block; padding: 15px 30px;">
+                                    <!-- generated by js -->
+                                </span>
+                                <div class="row">
+                                    <div class="col-12 col-md-6">
+                                        <!-- username -->
+                                        <div class="form-group">
+                                            <input type="text" class="floating-input" name="Username" id="username"
+                                                required>
+                                            <label for="username" class="floating-label">Username<span
+                                                    class="gl-form-asterisk"></span></label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <!-- user email -->
+                                        <div class="form-group">
+                                            <input type="text" class="floating-input" name="Email" id="email" required>
+                                            <label for="email" class="floating-label">Email<span
+                                                    class="gl-form-asterisk"></span></label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <!-- user review message -->
+                                        <div class="form-group">
+                                            <textarea name="Message"
+                                                class="product-review-description">Gave us your feedback about this product...</textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <!-- user review rating -->
+                                        <div class="user-rating-container">
+                                            <span>Gave us your rating</span>
+                                            <div class="user-rating">
+                                                <img src="/images/empty_star.png" class="raiting me-1" alt="raiting"
+                                                    data-index="0">
+                                                <img src="/images/empty_star.png" class="raiting me-1" alt="raiting"
+                                                    data-index="1">
+                                                <img src="/images/empty_star.png" class="raiting me-1" alt="raiting"
+                                                    data-index="2">
+                                                <img src="/images/empty_star.png" class="raiting me-1" alt="raiting"
+                                                    data-index="3">
+                                                <img src="/images/empty_star.png" class="raiting" alt="raiting"
+                                                    data-index="4">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group" style="margin-top: 20px;">
+                                            <button class="btn btn-primary js-submit-review">Submit</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="../../public/js/ecommerceLayout.js"></script>
+    <script type="module" src="/js/public.js"></script>
+    <script type="module" src="productDetails.js"></script>
+</body>
+
+</html>

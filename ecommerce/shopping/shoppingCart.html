@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../../public/css/customOYAstyle.css">
+    <link rel="stylesheet" href="shoppingCart.css">
+    <title>Shopping Cart</title>
+</head>
+
+<body>
+    <section id="navbar">
+        <header class="header">
+            <div class="navbar">
+                <div id="logo"><a href="/"><img src="/images/logo1.png" alt="" style="width: 100px;height:70px;"></a>
+                </div>
+                <div class="navbar-list">
+                    <div class="navbar-account">
+                        <div class="account-img">
+                            <img src="/public/images/avatar.png" alt="profile">
+                        </div>
+                        <div class="account-details">
+                            <div class="account-details dropdown">
+
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="navbar-list-items">
+                        <li class="navbar-list-item">
+                            <a href="/ecommerce/shopping/whishlistCart"><i class="fa-regular fa-heart"></i></a>
+                            <span class="badge-item" id="favBadge">0</span>
+                        </li>
+                        <li class="navbar-list-item">
+                            <a href="/ecommerce/shopping/shoppingCart"><i class="fa-brands fa-shopify"></i></a>
+                            <span class="badge-item" id="cartBagBadge">0</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+    </section>
+    <section id="shoppingCart" class="shopping-cart">
+        <div class="container">
+            <div class="card">
+                <h5 class="card-title d-flex justify-content-between align-items-center">
+                    <div class="main-title d-flex justify-content-center align-items-center" style="font-size: 16px;">
+                        <span class="main-title-icon" style="margin-right:10px;">
+                            <span class="material-icons-sharp">
+                                store
+                            </span>
+                        </span>
+                        Shopping Cart
+                    </div>
+                </h5>
+                <div class="card-body" style="margin: 30px 0px;">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="table-responsive">
+                                <table>
+                                    <thead>
+                                        <th style="text-align: start; padding-left: 40px;">Product</th>
+                                        <th>Price</th>
+                                        <th>Quantity</th>
+                                        <th>Actions</th>
+                                    </thead>
+                                    <tbody class="shoppingContainer">
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="shopingCart d-flex justify-content-between align-items-center"
+                                style="padding: 15px;">
+                                <p class="subtotal">Total Price : <span class="subtotal-span">0000000EPG</span></p>
+                                <a href="javascript:;" class="checkout-btn">Checkout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="not-enough-alert bg-warning">
+            This product not have available quantity..!
+        </div>
+    </section>
+</body>
+<script type="module" src="../../public/js/ecommerceLayout.js"></script>
+<script type="module" src="/js/public.js"></script>
+<script type="module" src="shopingCart.js"></script>
+
+</html>

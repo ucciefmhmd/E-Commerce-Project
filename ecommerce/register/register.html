@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Register</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel='stylesheet' href='/css/customOYAstyle.css'>
+    <link rel='stylesheet' href='assets/register.css'>
+</head>
+
+<body>
+    <section id="navbar" class="navbar">
+        <header class="header">
+            <div class="navbar">
+                <div id="logo"><a href="index.html"><img src="/images/logo1.png" alt=""
+                            style="width: 100px;height:70px;"></a></div>
+                <div class="navbar-list">
+                    <div class="navbar-account">
+                        <div class="account-img">
+                            <img src="/images/avatar.png" alt="profile">
+                        </div>
+                        <div class="account-details dropdown">
+
+                        </div>
+                    </div>
+                    <ul class="navbar-list-items">
+                        <li class="navbar-list-item">
+                            <a href="#"><i class="fa-regular fa-heart"></i></a>
+                            <span class="badge-item" id="favBadge">5</span>
+                        </li>
+                        <li class="navbar-list-item">
+                            <a href="#"><i class="fa-brands fa-shopify"></i></a>
+                            <span class="badge-item" id="cartBagBadge">5</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+    </section>
+
+    <div class="images-register">
+        <img class="img-shape1" src="images/laptop.png" alt="">
+        <img class="img-shape2" src="images/shape-2.png" alt="">
+        <img class="img-shape3" src="images/shape-1.png" alt="">
+        <img class="img-shape4" src="images/man.png" alt="">
+    </div>
+
+    <div class="section-register">
+        <div class="w-25 shadow">
+            <h1 class="text-center">Register to <span class="text-primary">OYA</span></h1>
+            <form id="registerForm" class="register-form">
+                <span class="text-danger" style="display: block; padding: 10px 0px;" id="validationRegisterSpan"></span>
+                <div class="form-group-container" style="margin-bottom: 15px;">
+                    <div class="form-group" style="margin-bottom: 5px;">
+                        <input type="text" id="registerUsername" name="Username" class="floating-input" required>
+                        <label for="registerUsername" class="floating-label">Username...<span
+                                class="gl-form-asterisk"></span></label>
+                    </div>
+                    <span id="valUsername" class="text-danger" style="display: block; padding: 5px 0px;"></span>
+                </div>
+                <div class="form-group-container" style="margin-bottom: 15px;">
+                    <div class="form-group" style="margin-bottom: 5px;">
+                        <input type="text" id="registerEmail" name="Email" class="floating-input" required>
+                        <label for="registerEmail" class="floating-label">Email...<span
+                                class="gl-form-asterisk"></span></label>
+                    </div>
+                    <span id="valEmail" class="text-danger" style="display: block; padding: 5px 0px;"></span>
+                </div>
+                <div class="form-group-container">
+                    <div class="form-group" style="margin-bottom: 5px;">
+                        <input type="password" id="registerPassword" name="Password" class="floating-input" required>
+                        <label for="registerPassword" class="floating-label">Password...<span
+                                class="gl-form-asterisk"></span></label>
+                    </div>
+                    <span id="valPassword" class="text-danger" style="display: block; padding: 5px 0px;"></span>
+                </div>
+                <button class="btn btn-primary js-register-btn" type="submit">Register</button>
+            </form>
+        </div>
+    </div>
+    <script type="module" src="../../public/js/ecommerceLayout.js"></script>
+    <script type="module" src='assets/register.js'></script>
+</body>
+
+</html>
