@@ -1,0 +1,30 @@
+
+.dataTables_paginate.paging_simple_numbers .pagination {
+    margin: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.dataTables_info {
+    align-items: center;
+}
+
+.dt-button-collection {
+    background-color: #FFF;
+    width: 150px;
+    position: absolute;
+    top: 168.957px !important;
+    left: 839.759px !important;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px !important;
+    border-radius: 3px;
+    z-index: 50000000;
+}
+
+.dt-button.dropdown-item {
+    text-align: start;
+}
+
+.dt-button.buttons-collection .dt-down-arrow {
+    display: none;
+}

@@ -1,0 +1,204 @@
+
+
+/* start profile */
+.profile-container {
+    display: flex;
+    gap: 30px;
+}
+
+
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (max-width: 1200px) {
+    .profile-container {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+.profile-container .profile-information {
+    background-color: #FFF;
+    width: 30%;
+    padding: 35px 25px;
+    border-radius: 5px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (max-width: 1200px) {
+    .profile-container .profile-information {
+        width: 100%;
+    }
+}
+
+.profile-container .profile-settings {
+    background-color: #FFF;
+    width: 70%;
+    border-radius: 5px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    display: flex;
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (max-width: 1200px) {
+    .profile-container .profile-settings {
+        width: 100%;
+    }
+}
+
+.profile-container .profile-settings form {
+    width: 55%;
+    padding: 30px 20px;
+
+}
+
+.profile-container .profile-settings .style-img {
+    background-color: #eaeaea;
+    width: 45%;
+    height: 100%;
+}
+
+.profile-container .profile-settings .style-img img {
+    width: 100%;
+    height: 100%;
+    border-radius: 0px 5px 5px 0px;
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (max-width: 992px) {
+    .profile-container .profile-settings .style-img {
+        display: none;
+    }
+
+    .profile-container .profile-settings form {
+        width: 100%
+    }
+} 
+
+.profile-container .profile-information-card {
+    display: flex;
+}
+
+.profile-container .profile-information-card .card-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 5px;
+    position: relative;
+}
+
+@media only screen and (max-width: 600px) {
+    .profile-container .profile-information-card .card-img {
+        width: 80px;
+        height: 80px;
+
+    }
+} 
+
+.profile-container .profile-information-card .card-img::before{
+    content: "";
+    background-color: #46ec46;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    position: absolute;
+    top: -3px;
+    right: -3px;
+    padding: 1px;
+}
+
+.profile-container .profile-information-card .card-img img {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+
+}
+
+.profile-container .profile-information-card .card-details{
+    padding: 15px 15px 0px 15px;
+}
+.profile-container .profile-information-card .card-details .profile-username,
+.profile-container .profile-information-card .card-details .profile-position {
+    padding: 0px;
+    margin: 0px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-wrap: nowrap;
+    width: 100%;
+    height: 25px;
+}
+
+
+
+@media only screen and (max-width: 600px) {
+    .profile-container .profile-information-card .card-details{
+        padding: 5px 5px 5px 15px;
+    }
+    .profile-container .profile-information-card .card-details .profile-username {
+        font-size: 15px;
+    }
+    .profile-container .profile-information-card .card-details .profile-position {
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+} 
+
+.profile-container .profile-information-card .card-details .profile-role {
+    background-color: #E4E9EE8F;
+    display: inline-block;
+    padding: 3px 15px;
+    color: #0989FF;
+    font-weight: bold;
+
+}
+
+.profile-container .profile-information .profile-details{
+    padding: 20px 0px;
+}
+
+.profile-container .profile-information .profile-details .profile-details-item{
+    padding: 10px 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.profile-container .profile-information .profile-details .profile-details-item .left {
+    font-weight: bold;
+}
+
+
+.profile-container .profile-information .profile-details .profile-details-item .left+span {
+    color: #555;
+}
+
+@media only screen and (max-width: 600px) {
+    .profile-container .profile-information .profile-details .profile-details-item .left {
+        font-size: 14px;
+    }
+
+    .profile-container .profile-information .profile-details .profile-details-item .left+span {
+        font-size: 14px;
+    }
+} 
+
+/* end profile */
+
+/* start changeEmail */
+.email-verification-alert,
+.password-verification-alert {
+    background-color: #6cf26c5e;
+    padding: 12px;
+    color: #017101;
+    width: 400px;
+    border-radius: 10px;
+    text-align: center;
+    border: 1px solid #81d981;
+    position: absolute;
+    top: 50%;
+    right: 5%;
+    z-index: 555555;
+    opacity: 0;
+    transition: opacity 0.3s linear;
+}
+/* end changeEmail */

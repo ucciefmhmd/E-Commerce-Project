@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>e-commerce login application</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="/css/customOYAstyle.css">
+    <link rel="stylesheet" href="assets/css/login.css">
+</head>
+<body>
+    <div class="container" id="container">
+        <div class="form-container sign-in-container">
+            <form id="loginForm" method="post">
+                <h3 style="padding-bottom: 15px"> Login Now</h3>
+                <span class="text-danger" style="display: block; padding: 10px;" id="errorSpan"></span>
+                <div class="form-group" style="width: 100%;">
+                    <input type="email" name="Email" class="floating-input" id="email" required>
+                    <label for="email" class="floating-label">Email address<span class="gl-form-asterisk"></span></label>
+                </div>
+                <div class="form-group" style="width: 100%;">
+                    <input type="password" name="Password" class="floating-input" id="password" required>
+                    <label for="password" class="floating-label">Password<span class="gl-form-asterisk"></span></label>
+                </div>
+                <button id="loginBtn" style="margin-top: 10px; border-radius: 0px; font-size: 13px; padding: 10px;" class="btn btn-primary w-100"> Login</button>
+            </form>
+            
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-right">
+                    <img src="assets/images/loginAdminPanel.png" alt="movie-2" height="350"/>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script type="module" src="assets/js/login.js"></script>
+</body>
+</html>

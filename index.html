@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>E-Commerce Home</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/css/customOYAstyle.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- start loading -->
+    <div class="overlay-loading">
+        <img src="/images/loading.gif" width="70" />
+    </div>
+    <!-- start home section -->
+    <section id="Home" class="home">
+        <header class="header">
+            <div class="navbar">
+                <div id="logo"><a href="/"><img src="/images/logo1.png" alt="" style="width: 100px;height:70px;"></a>
+                </div>
+                <div class="navbar-list">
+                    <div class="navbar-account">
+                        <div class="account-img">
+                            <img src="/public/images/avatar.png" alt="profile">
+                        </div>
+                        <div class="account-details">
+                            <div class="account-details dropdown">
+
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="navbar-list-items">
+                        <li class="navbar-list-item">
+                            <a href="/ecommerce/shopping/whishlistCart"><i class="fa-regular fa-heart"></i></a>
+                            <span class="badge-item" id="favBadge">0</span>
+                        </li>
+                        <li class="navbar-list-item">
+                            <a href="/ecommerce/shopping/shoppingCart"><i class="fa-brands fa-shopify"></i></a>
+                            <span class="badge-item" id="cartBagBadge">0</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+
+        <div class="slider">
+            <div class="myslide fade">
+                <div class="txt">
+                    <h1>Welcome, we are <span style="color: #8f8712;"> OYA</span></h1>
+                    <p>In this season, find the best</p>
+                    <p><span style="color: #8f8712;">Exclusive</span> collection for everyone</p>
+                    </p>
+                </div>
+                <div class="image-slider">
+                    <img src="imgs/slider/slider-img-1.png" style="width: 100%; height: 100%;">
+                </div>
+            </div>
+
+            <div class="myslide fade">
+                <div class="txt">
+                    <h1>Welcome, we are <span style="color: #8f8712;"> OYA</span></h1>
+                    <p>In this season, find the best</p>
+                    <p><span style="color: #8f8712;">Exclusive</span> collection for everyone</p>
+                    </p>
+                </div>
+                <div class="image-slider img-slidr2">
+                    <img src="imgs/slider/slider-img-2.png" style="width: 100%; height: 100%;">
+                </div>
+            </div>
+
+            <div class="myslide fade">
+                <div class="txt">
+                    <h1>Welcome, we are <span style="color: #8f8712;"> OYA</span></h1>
+                    <p>In this season, find the best</p>
+                    <p><span style="color: #8f8712;">Exclusive</span> collection for everyone</p>
+                    </p>
+                </div>
+                <div class="image-slider">
+                    <img src="imgs/slider/slider-img-3.png" style="width: 100%; height: 100%;">
+                </div>
+            </div>
+        </div>
+
+        <a class="prev">&#10094;</a>
+        <a class="next">&#10095;</a>
+
+        <div class="dotsbox" style="text-align:center">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+        </div>
+
+    </section>
+    <!-- end home section -->
+    <!-- start best seller section -->
+    <section id="bestSeller" class="best-seller">
+        <div class="wrapper-seller" id="wrapperSeller">
+            <div class="section-seller section-slider-title">
+                <div class="data-seller">
+                    <h4 class="section-name">
+                        <span class="section-icon">
+                            <i class="fa-solid fa-cart-shopping fa-xs"></i>
+                        </span>
+                        Best Seller
+                    </h4>
+                    <h2 class="txt-section">Explore our best seller</h2>
+                </div>
+                <div class="icon-seller">
+                    <i id="left-seller" class="fa-solid fa-angle-left"></i>
+                    <i id="right-seller" class="fa-solid fa-angle-right"></i>
+                </div>
+            </div>
+            <ul class="carousel-seller" id="carouselSeller">
+                <li class="card card-seller fadeImgSlide d-none">
+                    <div class="twoIcons">
+                        <p class="iconOnImage"><a href="#"><i class="fa-regular fa-heart"></i></a></p>
+                        <hr>
+                        <p class="iconOnImage"><a href="#"><i class="fa-brands fa-shopify"></i></a></p>
+                    </div>
+                    <div class="imgForProdct">
+                        <img src="imgs/category-main-1.jpg" alt="img" draggable="false">
+                        <div class="showAddCard">Add to card</div>
+                    </div>
+                    <div class="descOfProduct">
+                        <p class="nameProduct">Headphones</p>
+                        <p class="descProduct">Galaxy Tab S6 Lite 10.4-inch Android Tablet 128GB.</p>
+                        <p class="salProduct">$189.00</p>
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+    </section>
+    <!-- end best seller section -->
+    <!-- start category section -->
+    <section id="Category" class="category">
+        <div class="wrapper2">
+            <div class="section-category section-slider-title">
+                <div class="data-category">
+                    <h4 class="section-name">
+                        <span class="section-icon">
+                            <i class="fa-solid fa-tag"></i>
+                        </span>
+                        Categories
+                    </h4>
+                    <h2 class="txt-section">Browse by Category</h2>
+                </div>
+                <div class="category-icon" class="d-flex justify-content-center align-items-center">
+                    <i id="category-left" class="fa-solid fa-angle-left"></i>
+                    <i id="category-right" class="fa-solid fa-angle-right"></i>
+                </div>
+            </div>
+            <ul class="carousel2">
+                <li class="cardCategory"></li>
+                <li class="cardCategory"></li>
+
+
+            </ul>
+        </div>
+
+    </section>
+    <!-- end category section -->
+    <!-- start E3lan section -->
+    <section id="E3lan" class="e3lan">
+        <div>
+            <div class="ay7age">
+                <div class="txtE3lan">
+                    <h2>Samsong Galaxy</h2>
+                    <h2>S6, wifi Tablet</h2>
+                    <p>$953.00</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end E3lan section -->
+    <!-- start sale section -->
+    <section id="sale" class="sale">
+        <div class="section-details">
+            <div class="section-info">
+                <h4 class="section-name">
+                    <span class="section-icon">
+                        <i class="fa-solid fa-tag"></i>
+                    </span>
+                    Sale Products
+                </h4>
+                <h3 class="section-title">Explore our Special Offers</h3>
+            </div>
+        </div>
+
+        <div class="sale-container">
+            <div class="special-offer-container">
+                <div class="special-offer">
+                    <div class="special-offer-details">
+                        <h4>Special <br> Offer</h4>
+                        <p>Save 80%</p>
+                    </div>
+                    <div class="special-offer-cover">
+                        <img src="imgs/sale/special-offer.jpg" alt="special-offer" width="320">
+                    </div>
+                    <div class="special-offer-information">
+                        <div class="special-offer-name">
+                            Game Console Controller + USB 3.0 Cable
+                        </div>
+                        <div class="special-offer-price">
+                            <span class="special-old-price">99.00 EPG</span>
+                            <span class="special-new-price">70.00 EPG</span>
+                        </div>
+                        <div class="special-offer-metter">
+                            <div>
+                                <span>Available: 6</span>
+                                <span>Already Solid: 28</span>
+                            </div>
+                            <div class="special-metter">
+                                <div class="counter"></div>
+                            </div>
+                            <div class="special-offer-footer">
+                                <p>Hurry Up! Offer ends in:</p>
+                                <p class="end-special-offer">11 jan 2024</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sale-items-container">
+                <div class="sale-item">
+                    <div class="sale-item-details">
+                        <p class="sale-item-category">Speaker</p>
+                        <h4 class="sale-item-name">
+                            Wireless Audio System Multiroom 360 degree Full base audio
+                        </h4>
+                    </div>
+                    <div class="sale-item-cover">
+                        <img src="imgs/product-10.jpg" alt="">
+                    </div>
+                    <div class="sale-item-price">
+                        <span class="sale-item-price-badge">700 EPG</span>
+                        <span class="sale-item-price-icon"><i class="fa-solid fa-cart-plus"></i></span>
+                    </div>
+                </div>
+                <div class="sale-item">
+                    <div class="sale-item-details">
+                        <p class="sale-item-category">Speaker</p>
+                        <h4 class="sale-item-name">
+                            Wireless Audio System Multiroom 360 degree Full base audio
+                        </h4>
+                    </div>
+                    <div class="sale-item-cover">
+                        <img src="imgs/product-10.jpg" alt="">
+                    </div>
+                    <div class="sale-item-price">
+                        <span class="sale-item-price-badge">700 EPG</span>
+                        <span class="sale-item-price-icon"><i class="fa-solid fa-cart-plus"></i></span>
+                    </div>
+                </div>
+                <div class="sale-item">
+                    <div class="sale-item-details">
+                        <p class="sale-item-category">Speaker</p>
+                        <h4 class="sale-item-name">
+                            Wireless Audio System Multiroom 360 degree Full base audio
+                        </h4>
+                    </div>
+                    <div class="sale-item-cover">
+                        <img src="imgs/product-10.jpg" alt="">
+                    </div>
+                    <div class="sale-item-price">
+                        <span class="sale-item-price-badge">700 EPG</span>
+                        <span class="sale-item-price-icon"><i class="fa-solid fa-cart-plus"></i></span>
+                    </div>
+                </div>
+                <div class="sale-item">
+                    <div class="sale-item-details">
+                        <p class="sale-item-category">Speaker</p>
+                        <h4 class="sale-item-name">
+                            Wireless Audio System Multiroom 360 degree Full base audio
+                        </h4>
+                    </div>
+                    <div class="sale-item-cover">
+                        <img src="imgs/product-10.jpg" alt="">
+                    </div>
+                    <div class="sale-item-price">
+                        <span class="sale-item-price-badge">700 EPG</span>
+                        <span class="sale-item-price-icon"><i class="fa-solid fa-cart-plus"></i></span>
+                    </div>
+                </div>
+                <div class="sale-item">
+                    <div class="sale-item-details">
+                        <p class="sale-item-category">Speaker</p>
+                        <h4 class="sale-item-name">
+                            Wireless Audio System Multiroom 360 degree Full base audio
+                        </h4>
+                    </div>
+                    <div class="sale-item-cover">
+                        <img src="imgs/product-10.jpg" alt="">
+                    </div>
+                    <div class="sale-item-price">
+                        <span class="sale-item-price-badge">700 EPG</span>
+                        <span class="sale-item-price-icon"><i class="fa-solid fa-cart-plus"></i></span>
+                    </div>
+                </div>
+                <div class="sale-item">
+                    <div class="sale-item-details">
+                        <p class="sale-item-category">Speaker</p>
+                        <h4 class="sale-item-name">
+                            Wireless Audio System Multiroom 360 degree Full base audio
+                        </h4>
+                    </div>
+                    <div class="sale-item-cover">
+                        <img src="imgs/product-10.jpg" alt="">
+                    </div>
+                    <div class="sale-item-price">
+                        <span class="sale-item-price-badge">700 EPG</span>
+                        <span class="sale-item-price-icon"><i class="fa-solid fa-cart-plus"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end sale section-->
+    <!-- start products section -->
+    <section id="Products" class="products">
+        <div class="wrapper">
+            <div class="section-allproduct section-slider-title">
+                <div class="data-allproduct">
+                    <h4 class="section-name">
+                        <span class="section-icon">
+                            <i class="fa-solid fa-cart-shopping fa-xs"></i>
+                        </span>
+                        All Products
+                    </h4>
+                    <h2 class="txt-section">Explore our Products</h2>
+                </div>
+                <div class="icon-allProduct">
+                    <i id="all-left" class="fa-solid fa-angle-left"></i>
+                    <i id="all-right" class="fa-solid fa-angle-right"></i>
+                </div>
+            </div>
+            <ul class="carousel">
+                <li class="card d-none">
+                    <div class="twoIcons">
+                        <p class="iconOnImage"><a href="#"><i class="fa-regular fa-heart"></i></a></p>
+                        <hr>
+                        <p class="iconOnImage"><a href="#"><i class="fa-brands fa-shopify"></i></a></p>
+                    </div>
+                    <div class="img"><img src="imgs/category-main-1.jpg" alt="img" draggable="false"></div>
+                    <div class="descOfProduct">
+                        <p class="nameProduct">Headphones</p>
+                        <p class="descProduct">Galaxy Tab S6 Lite 10.4-inch Android Tablet 128GB.</p>
+                        <p class="salProduct">$189.00</p>
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+    </section>
+    <!-- end products section -->
+    <!-- start AboutMe section -->
+    <section id="dataAboutMe" class="about-me">
+        <div class="section-about">
+            <h4 class="section-name">
+                <span class="section-icon">
+                    <i class="fa-regular fa-thumbs-up"></i>
+                </span>
+                Why Us
+            </h4>
+            <h2 class="txt-section">Why People Choose Us</h2>
+        </div>
+        <div class="container">
+            <div class="someInfo">
+                <div class="items">
+                    <img src="imgs/services/service1.png" alt="">
+                    <div class="dataDeleiver">
+                        <span class="text-muted">Fast & Secure <br> Delivery</span>
+                    </div>
+                </div>
+                <div class="items">
+                    <img src="imgs/services/service2.png" alt="">
+                    <div class="dataDeleiver">
+                        <span class="text-muted">100% Guarantee <br> On Product</span>
+                    </div>
+                </div>
+                <div class="items">
+                    <img src="imgs/services/service3.png" alt="">
+                    <div class="dataDeleiver">
+                        <span class="text-muted">24 Hour Return <br> Policy</span>
+                    </div>
+                </div>
+                <div class="items">
+                    <img src="imgs/services/service4.png" alt="">
+                    <div class="dataDeleiver">
+                        <span class="text-muted">Next Level Pro <br> Quality</span>
+                    </div>
+                </div>
+                <div class="items">
+                    <img src="imgs/services/service5.png" alt="">
+                    <div class="dataDeleiver">
+                        <span class="text-muted">Fast & Secure <br> Delivery</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- end AboutMe section -->
+    <script type="module" src="/js/public.js"></script>
+    <script type="module" src="public/js/ecommerceLayout.js"></script>
+    <script type="module" src="ecommerce/home/home.js"></script>
+    <script type="module" src='ecommerce/home/app.js'></script>
+</body>
+
+</html>
