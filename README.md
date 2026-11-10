@@ -50,7 +50,7 @@ Other scripts:
 ```bash
 npm test             # unit tests (Vitest) for the pure helpers and form validation
 npm run build        # production build of all 17 pages into dist/
-npm run check:dist   # fails if a page listed in vite.config.js is missing from dist/
+npm run check:dist   # fails if a page is missing from dist/ or from vite.config.js
 npm run preview      # serve dist/ locally
 ```
 
@@ -97,12 +97,12 @@ tests/                        Vitest unit tests
 This is a classroom project and is **not safe to run as a real shop**. Everything happens in the browser, so anyone can open the developer tools and talk to Firestore directly with the same permissions the pages have. Specifically:
 
 - **Admin authorization is client-side only.** The admin pages only check that *someone* is signed in with Firebase Authentication. The `Role` stored on a `Users` document is displayed but not checked anywhere, and nothing is enforced server-side.
-- **Customer passwords are stored in plaintext in Firestore** (`Customers.Password`), and login is checked in the browser by reading the whole `Customers` collection and comparing values. The "token" saved in `localStorage` is a fixed string, not a credential; setting `customerId` in `localStorage` is enough to act as that customer.
+- **Customer passwords are stored in plaintext in Firestore** (`Customers.Password`), and login is checked in the browser by reading the whole `Customers` collection and comparing values. The "token" saved in `localStorage` is a predictable string built from the customer's email, not a credential; setting `customerId` in `localStorage` is enough to act as that customer.
 - **Order totals and stock are computed in the browser.** The cart total, the order document and the stock/purchase-count updates on confirmation are all written by client code and can be changed by the user.
 - **The admin password is bundled into the client JavaScript.** `VITE_ADMIN_PASSWORD` ends up in the build output. The admin panel uses it to seed the admin account and to sign the admin back in after creating another user.
 - **Firestore and Storage security rules are not in this repository.** Whatever rules the Firebase project has decide what is actually protected; the code assumes broad read/write access.
 - Values from the database are escaped (and product descriptions sanitized with DOMPurify) before they are inserted into the page. That stops stored markup from running as script in other users' browsers, but it is output encoding only: it does not restrict what can be written to the database.
-- Earlier commits contained hard-coded configuration values. They were moved to environment variables, and the credentials they contained should be considered compromised.
+- Earlier versions hard-coded the Firebase config and an admin login. The config now comes from environment variables, and those earlier credentials should be treated as compromised.
 - The TinyMCE editor is loaded from Tiny Cloud with the project's API key in `adminPanel/products/create.html` and `update.html`. That key is meant to be public, but it should be restricted to your domains in the Tiny Cloud dashboard.
 
 What a proper fix needs:
