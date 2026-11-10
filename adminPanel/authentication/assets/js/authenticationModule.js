@@ -24,7 +24,7 @@ export const authenticationLogin = async () => { //login user
         try{
             const credential = await signInWithEmailAndPassword(authetication , currentObject.Email , currentObject.Password);
             localStorage.setItem("credential" , JSON.stringify(credential));
-            window.location.assign("http://localhost:5173/adminPanel/dashboard/home");
+            window.location.assign("/adminPanel/dashboard/home");
         }
         catch(error)
         {

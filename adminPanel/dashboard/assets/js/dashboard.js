@@ -133,7 +133,7 @@ const authenticationLogout = () => {
             try {
 
                 await signOut(authentication);
-                location.assign("http://localhost:5173/adminPanel/authentication/login");
+                location.assign("/adminPanel/authentication/login");
 
             }
             catch(error) {

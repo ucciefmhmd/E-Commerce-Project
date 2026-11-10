@@ -311,9 +311,9 @@ $(function() {
                             <div class="dropdown">
                                 <button class="btn btn-label-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">Actions</button>
                                 <ul class="dropdown-menu">
-                                <li> <a class="dropdown-item" href="/adminpanel/products/details?id=${full["id"]}" data-id=${full["id"]}><i class="fa-regular fa-eye me-2"></i> Details</a> </li>
+                                <li> <a class="dropdown-item" href="/adminPanel/products/details?id=${full["id"]}" data-id=${full["id"]}><i class="fa-regular fa-eye me-2"></i> Details</a> </li>
                                 <li> <a class="dropdown-item js-add-sale-product" href="javascript:;" data-id=${full["id"]}><i class="fa-solid fa-percent me-2"></i> Add Sale</a> </li>
-                                    <li> <a class="dropdown-item" href="/adminpanel/products/update?id=${full["id"]}" data-id=${full["id"]}><i class="fa-solid fa-pencil me-2"></i> Edit</a> </li>
+                                    <li> <a class="dropdown-item" href="/adminPanel/products/update?id=${full["id"]}" data-id=${full["id"]}><i class="fa-solid fa-pencil me-2"></i> Edit</a> </li>
                                     <li> <a class="dropdown-item js-toggle-product-btn" href="javascript:void(0);" data-id=${full["id"]}><i class="fa-regular fa-eye-slash me-2"></i> Toggle Status</a> </li>
                                     <li> <a class="dropdown-item js-delete-product-btn" href="javascript:void(0);" data-id=${full["id"]}><i class="fa-solid fa-trash-can me-2"></i>Delete</a> </li>
                                 </ul>
