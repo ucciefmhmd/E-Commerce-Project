@@ -26,14 +26,15 @@ const layoutHandle = () => {
             const documentationReference = doc(firestore , "Users" , user.uid);
 
             //check user verification changed email
-            const currentUser = getSingleUserById(user.uid);;
-            if(currentUser.Email !== user.email){
+            //(getSingleUserById is async; without await this compared a Promise and wrote on every load)
+            const currentUser = await getSingleUserById(user.uid);
+            if(currentUser && currentUser.Email !== user.email){
                 try{
                     await updateDoc(documentationReference , {Email: user.email});
                 }
                 catch(error)
                 {
-                    console.log(error);
+                    console.error(error);
                 }
             }
 

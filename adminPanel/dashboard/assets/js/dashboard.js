@@ -416,17 +416,18 @@ const deleteProductHandle = () => {
 //handle users
 const showUsersModal = () => {
 
-    document.addEventListener("click" , async (event) => {
-
-        function windowOnClick(event) {
-            if (event.target === document.getElementById("usersModal")) {
-                document.getElementById("usersModal").classList.remove("show-modal")
-            }
+    //registered once (they used to be added again on every click anywhere on the page)
+    function windowOnClick(event) {
+        if (event.target === document.getElementById("usersModal")) {
+            document.getElementById("usersModal").classList.remove("show-modal")
         }
-    
-        document.querySelector(".user-modal .close-button").addEventListener("click", () => {document.getElementById("usersModal").classList.remove("show-modal")});
-        document.querySelector(".user-modal .close-btn").addEventListener("click", () => {document.getElementById("usersModal").classList.remove("show-modal")});
-        window.addEventListener("click", windowOnClick);
+    }
+
+    document.querySelector(".user-modal .close-button").addEventListener("click", () => {document.getElementById("usersModal").classList.remove("show-modal")});
+    document.querySelector(".user-modal .close-btn").addEventListener("click", () => {document.getElementById("usersModal").classList.remove("show-modal")});
+    window.addEventListener("click", windowOnClick);
+
+    document.addEventListener("click" , async (event) => {
 
 
         if(event.target.classList.contains("js-create-user-btn"))
@@ -473,11 +474,6 @@ const showUsersModal = () => {
             document.getElementById("submitUserBtn").textContent = "Edit";
 
             document.getElementById("submitUserBtn").classList.replace("btn-primary" , "btn-warning");
-
-
-
-
-            userUpdate = true;
 
         }
 

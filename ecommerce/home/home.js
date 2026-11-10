@@ -31,10 +31,10 @@ const getCategoriesData = () => {
 
     const collectionReference = collection(firestore , "Categories");
 
-    const categories = [];
-
     onSnapshot(collectionReference , (snapshot) => {
 
+        //fresh array per snapshot (it used to live outside, so every update duplicated the list)
+        const categories = [];
 
         snapshot.docs.forEach((doc) => {
 
@@ -89,10 +89,10 @@ const getProductsData = () => {
 
     const collectionReference = collection(firestore , "Products");
 
-    const products = [];
-
     onSnapshot(collectionReference , (snapshot) => {
 
+        //fresh array per snapshot (it used to live outside, so every update duplicated the list)
+        const products = [];
 
         snapshot.docs.forEach((doc) => {
 
@@ -107,9 +107,7 @@ const getProductsData = () => {
 
         //prepere for best seller 
         const bestSeller = availableProducts.filter((product) => {return product.numberOfPurchasing >= 50})
-        .sort((a , b) => {
-            a.numberOfPurchasing - b.numberOfPurchasing
-        })
+        .sort((a , b) => b.numberOfPurchasing - a.numberOfPurchasing) //most purchased first (the old comparator returned nothing)
         const bestSeller20 = bestSeller.slice(0 , 20);
 
         setupBestSellerProducts(bestSeller20);

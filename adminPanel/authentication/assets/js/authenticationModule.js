@@ -58,10 +58,12 @@ export const authenticationValidation = (data , status) => {
     validationResult.isValid = false;
     validationResult.messageError = "";
 
-    const regexEmail = new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/gi);
+    // No /g flag: a global regex keeps lastIndex between .test() calls, so the
+    // same valid input would alternately pass and fail.
+    const regexEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/i;
     const emailValid = regexEmail.test(data.Email);
 
-    const regexPhone = new RegExp(/^(\+201|01|00201)[0-2,5]{1}[0-9]{8}/g);
+    const regexPhone = /^(\+201|01|00201)[0-2,5]{1}[0-9]{8}/;
     const phoneValid = regexPhone.test(data.Phone);
 
     if(!data.Email && (status == "Register" || status == "Login")) {

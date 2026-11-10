@@ -503,7 +503,7 @@ export const reviewValidation = (data) => {
     validationResult.isValid = false;
     validationResult.messageError = "";
 
-    const regexEmail = new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/gi);
+    const regexEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/i;
     const emailValid = regexEmail.test(data.Email);
 
 
