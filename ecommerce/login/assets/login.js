@@ -161,7 +161,6 @@ document.querySelector(".js-login-btn").addEventListener("click" , async(event) 
     }
     else
     {
-        console.log("invalid");
     }
 
 

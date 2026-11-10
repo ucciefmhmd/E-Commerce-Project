@@ -32,7 +32,6 @@ export const getCustomers = () => {
 
 const generateCustomerDatatable = (customers) => {
 
-    console.log(customers);
 
      document.getElementById("customersDataContainer").innerHTML = "";
 

@@ -78,7 +78,6 @@ const prepareProductUpdateForm = async(form , id) => {
 
 
 
-    console.log(currentObject);
 }
 
 

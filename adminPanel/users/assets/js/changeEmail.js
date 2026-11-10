@@ -85,11 +85,9 @@ const changeUserEmail = () => {
 
         //get form data
         const currentObject = getFormData(changeEmailForm);
-        console.log(currentObject);
         //validation 
         const validationResult = authenticationValidation(currentObject , "ChangeEmail");
 
-        console.log(validationResult);
 
         if(validationResult.isValid)
         {
@@ -103,7 +101,6 @@ const changeUserEmail = () => {
 
             `
 
-            console.log(currentObject);
 
             changeEmailHandle(currentObject).then((data) => {
 
@@ -159,60 +156,6 @@ const changeUserEmail = () => {
             document.getElementById("changeEmailValidationSpan").textContent = validationResult.messageError;
         }
 
-        // if(validationResult.isValid) {
-
-        //     delete currentObject.CreateAt;
-        //     currentObject.LastUpdatedAt = `${new Date()}`;
-
-        //     document.getElementById("updateUserBtn").classList.add("disabled");
-
-        //     document.getElementById("updateUserBtn").innerHTML = 
-        //     `
-        //         <div class="spinner-border text-light me-1" role="status" style="width:15px; height: 15px">
-        //             <span class="visually-hidden">Loading...</span>
-        //         </div>
-        //         Looding..
-    
-        //     `
-
-        //     //if data is valid send it
-        //     updateUserHandle(currentObject , id)
-        //     .then((data) => {
-
-        //         if(data.done){
-
-        //             document.getElementById("updateUserBtn").classList.remove("disabled");
-
-        //             document.getElementById("updateUserBtn").innerHTML = 
-        //             `
-        //                 Save changes
-            
-        //             `
-
-        //             document.getElementById("updateUserValidationSpan").textContent = "";
-
-        //         }
-
-        //         document.getElementById("profileCover").value = "";
-
-        //     })
-        //     .catch((data) => {
-
-        //         document.getElementById("updateUserBtn").classList.remove("disabled");
-
-        //         document.getElementById("updateUserBtn").innerHTML = 
-        //         `
-        //             Save changes
-        
-        //         `
-
-        //         document.getElementById("updateUserValidationSpan").textContent = data.err;
-        //     });
-        // }
-        // else
-        // {
-        //     document.getElementById("updateUserValidationSpan").textContent = validationResult.messageError;
-        // }
     });
 
 }

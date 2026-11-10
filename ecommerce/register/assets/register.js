@@ -208,7 +208,6 @@ document.querySelector(".js-register-btn").addEventListener("click" , async(even
     }
     else
     {
-        console.log("invalid");
     }
 
 

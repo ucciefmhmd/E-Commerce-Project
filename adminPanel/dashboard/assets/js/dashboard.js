@@ -210,7 +210,6 @@ const saveCategoryHandle = (form) => {
         }
         else
         { //update
-            console.log("updated")
             //get categoryId from hidden input.
             const categoryId = document.getElementById("categoryId").value;
 

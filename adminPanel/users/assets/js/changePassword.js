@@ -88,7 +88,6 @@ const changeUserPassword = () => {
         //validation 
         const validationResult = authenticationValidation(currentObject , "ChangePassword");
 
-        console.log(validationResult);
 
         if(validationResult.isValid)
         {
@@ -102,7 +101,6 @@ const changeUserPassword = () => {
     
             `
 
-            console.log(currentObject);
 
             changePasswordHandle(currentObject).then((data) => {
 

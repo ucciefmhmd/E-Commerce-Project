@@ -153,7 +153,6 @@ export const uploadImagesDragAndDrop = () => {
 
     document.addEventListener("click" , (event) => {
         if(event.target.classList.contains("deleteImg")){
-            console.log(event.target.dataset.index);
             images.splice(event.target.dataset.index , 1);
             document.getElementById('previewImg').src = URL.createObjectURL(images[0]);
             showImages(images);
@@ -224,14 +223,12 @@ export const updateProductHandle = (form , id) => {
         //old product
         const oldProduct = await getSingleProductById(id);
 
-        console.log(oldProduct);
 
         const currentObject = getFormDataProduct(form);
         currentObject.Description = tinyMCE.activeEditor.getContent();
         currentObject.LastUpdatedAt = `${new Date()}`;
         currentObject.Images = images;
 
-        console.log(currentObject);
         //validation
         const validationResult = validationProduct(currentObject , true);
 
@@ -590,7 +587,7 @@ export const toggleStatusProduct = async (id) => {
     }
     catch(error)
     {
-        console.log(error);
+        console.error(error);
     }
 
 
@@ -611,7 +608,7 @@ export const deleteProduct = async (id) => {
     }
     catch(error)
     {
-        console.log(error);
+        console.error(error);
     }
 
 
@@ -680,7 +677,6 @@ export const addToWishlistHandle = async(id) => {
         }
         else
         {
-            console.log("this product is already existed...");
         }
 
 
@@ -722,7 +718,6 @@ export const addToCartHandle = async (id) => {
         }
         else
         {
-            console.log("this product is already existed...");
         }
 
 
