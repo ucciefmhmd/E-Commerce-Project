@@ -2,8 +2,6 @@
 
 A training project, built as a team at ITI. It's a storefront and an admin panel written in **vanilla JavaScript**, bundled with **Vite** as a multi-page app, with **Firebase** (Authentication, Firestore, Storage) as the backend. There is no server of its own: every page talks to Firebase directly from the browser.
 
-<!-- TODO(Youssef): confirm which parts you built yourself (e.g. "I built the admin panel's products and orders pages") before adding a "My role" section. -->
-
 ## Features
 
 **Storefront** (`index.html`, `ecommerce/`)
