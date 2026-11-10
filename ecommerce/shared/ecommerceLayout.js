@@ -93,3 +93,20 @@ const ecommerceLogout = () => {
 
 layoutHandle();
 
+//handle badges counter (cart / wishlist item counts kept in localStorage)
+const checkBadgesCounter = () => {
+
+    const shoppingCartBadge = document.getElementById("cartBagBadge");
+    if(localStorage.getItem("shoppingCart") && shoppingCartBadge){
+        shoppingCartBadge.textContent = JSON.parse(localStorage.getItem("shoppingCart")).length;
+    }
+
+    const wishlistBadge = document.getElementById("favBadge");
+    if(localStorage.getItem("wishlistCart") && wishlistBadge){
+        wishlistBadge.textContent = JSON.parse(localStorage.getItem("wishlistCart")).length;
+    }
+
+}
+
+checkBadgesCounter();
+
