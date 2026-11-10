@@ -18,4 +18,7 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
+      - run: npm test
       - run: npm run build
+      # fails if any page listed in vite.config.js is missing from dist/
+      - run: npm run check:dist
