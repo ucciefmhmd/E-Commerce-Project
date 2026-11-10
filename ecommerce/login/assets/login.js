@@ -1,6 +1,6 @@
-import { collection, getFirestore, onSnapshot } from "firebase/firestore";
+import { collection, onSnapshot } from "firebase/firestore";
 import { getFormData } from "../../../adminPanel/shared/extensions";
-import { app } from "../../../main";
+import { firestore } from "../../../main";
 
 
 //Constants
@@ -11,7 +11,6 @@ const password = document.getElementById("loginPassword");
 const valPassword = document.getElementById("valPassword");
 
 //firebase
-const firestore = getFirestore(app);
 const collectionCustomerReference = collection(firestore , "Customers");
 
 //check login authentication

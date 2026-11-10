@@ -1,5 +1,6 @@
 import {getAuth , createUserWithEmailAndPassword ,signInWithEmailAndPassword} from "firebase/auth";
 import { getFormData } from "../../../shared/extensions";
+import { authenticationValidation } from "../../../shared/validation";
 import { app } from "../../../../main";
 
 
@@ -50,61 +51,3 @@ export const authenticationLogin = async () => { //login user
         document.getElementById("errorSpan").textContent = validationResult.messageError
     }
 }
-
-
-export const authenticationValidation = (data , status) => {
-
-    const validationResult = new Object();
-    validationResult.isValid = false;
-    validationResult.messageError = "";
-
-    // No /g flag: a global regex keeps lastIndex between .test() calls, so the
-    // same valid input would alternately pass and fail.
-    const regexEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/i;
-    const emailValid = regexEmail.test(data.Email);
-
-    const regexPhone = /^(\+201|01|00201)[0-2,5]{1}[0-9]{8}/;
-    const phoneValid = regexPhone.test(data.Phone);
-
-    if(!data.Email && (status == "Register" || status == "Login")) {
-        validationResult.messageError = "email must be required..!!";
-    }
-    else if(!emailValid && (status == "Register" || status == "Login" || status == "ChangeEmail")){
-        validationResult.messageError = "invalid email..!!";
-    }
-    else if(!data.Username && status == "Update"){
-        validationResult.messageError = "username must be required..!!";
-    }
-    else if(!phoneValid && status == "Update" && data.Phone){
-        validationResult.messageError = "phone number invalid..!!";
-    }
-    else if(!data.Password && (status == "Register" || status == "Login")) {
-        validationResult.messageError = "password must be required..!!";
-    }
-    else if(!data.CurrentPassword && status == "ChangeEmail") {
-        validationResult.messageError = "Current Password must be required..!!";
-    }
-    else if(!data.CurrentPassword && status == "ChangePassword") {
-        validationResult.messageError = "Current Password must be required..!!";
-    }
-    else if(!data.NewPassword && status == "ChangePassword") {
-        validationResult.messageError = "New Password must be required..!!";
-    }
-    else if(!data.Role  && status == "Register"){
-        validationResult.messageError = "Role must be required..!!";
-    }
-    else
-    {
-        validationResult.isValid = true;
-        validationResult.messageError = "";
-    }
-
-    return validationResult
-
-
-}
-
-
-
-
-

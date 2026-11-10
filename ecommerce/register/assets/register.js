@@ -1,6 +1,6 @@
 import { getFormData } from "../../../adminPanel/shared/extensions";
-import {getFirestore , collection , addDoc, onSnapshot} from "firebase/firestore";
-import {app} from "../../../main";
+import {collection , addDoc, onSnapshot} from "firebase/firestore";
+import { firestore } from "../../../main";
 
 
 //Constants
@@ -13,7 +13,6 @@ const password = document.getElementById("registerPassword");
 const valPassword = document.getElementById("valPassword");
 
 //firebase
-const firestore = getFirestore(app);
 const collectionCustomerReference = collection(firestore , "Customers");
 
 //resit input

@@ -1,9 +1,9 @@
 import { collection, doc, getDoc, getDocs, onSnapshot, query, setDoc, updateDoc, where  } from "firebase/firestore";
 import { getFormData } from "../../../shared/extensions"
 import { app, firestore } from "../../../../main";
-import { authenticationValidation } from "../../../authentication/assets/js/authenticationModule";
+import { authenticationValidation } from "../../../shared/validation";
 import {createUserWithEmailAndPassword , getAuth, signInWithEmailAndPassword ,verifyBeforeUpdateEmail , updatePassword, signInWithCredential, signOut} from "firebase/auth";
-import { deleteObject, getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
+import { deleteFile, uploadFile } from "../../../shared/storage";
 
 // Admin account used by the admin panel. Read from environment variables (see .env.example).
 // Note: anything bundled into browser JavaScript is visible to users; see README "Security notes".
@@ -276,49 +276,11 @@ export const changePasswordHandle = (currentObject) => {
 
 }
 
-const uploadImage = (image) => {
-
-    return new Promise((resolve , reject) => {
-
-
-        const firebaseStoreage = getStorage(app);
-        const storgeReference = ref(firebaseStoreage , `Users/${image.name}`);
-
-        const metadata = {contentType : image.type};
-
-        const uploadTask = uploadBytesResumable(storgeReference , image , metadata);
-        uploadTask.then((snapshot) => {
-
-            getDownloadURL(storgeReference).then((url) => {
-
-
-                resolve({imageUrl: url , fullPath: snapshot.metadata.fullPath});
-
-
-            })
-            .catch((error) => {
-                reject(error);
-            })
-
-
-        })
-        .catch((error) => {
-            reject(error);
-        })
-
-
-
-
-
-    });
-
-
+//upload profile image, resolve with {imageUrl, fullPath} (the shape stored on Users docs)
+const uploadImage = async (image) => {
+    const { url , fullPath } = await uploadFile("Users" , image);
+    return {imageUrl: url , fullPath: fullPath};
 }
 
 
-export const deleteImage = (fullPath) => {
-    const firebaseStorage = getStorage(app);
-    const storgeReference = ref(firebaseStorage , fullPath);
-    deleteObject(storgeReference).then(() => {console.log("image deleted")})
-    .catch((err) => {console.log(err)})
-}
+export const deleteImage = deleteFile;

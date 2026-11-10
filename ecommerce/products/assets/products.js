@@ -1,6 +1,6 @@
 import { collection, onSnapshot } from "firebase/firestore";
 import { firestore } from "../../../main";
-import { calculateRating } from "../../../adminPanel/shared/extensions";
+import { calculateRating } from "../../../adminPanel/shared/helpers";
 
 
 //constants

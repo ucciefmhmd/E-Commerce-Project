@@ -1,13 +1,14 @@
-import { addDoc, collection, doc, getFirestore, onSnapshot, updateDoc } from "firebase/firestore";
+import { addDoc, collection, doc, onSnapshot, updateDoc } from "firebase/firestore";
 import { addToCartHandle, addToWishlistHandle, getSingleProductById } from "../../adminPanel/products/assets/js/product";
-import { calculateRating, getFormData } from "../../adminPanel/shared/extensions";
-import { app } from "../../main";
+import { getFormData } from "../../adminPanel/shared/extensions";
+import { calculateRating } from "../../adminPanel/shared/helpers";
+import { reviewValidation } from "../../adminPanel/shared/validation";
+import { firestore } from "../../main";
 
 let params = new URLSearchParams(location.search);
 const id = params.get('id');
 
 //Constants
-const firestore = getFirestore(app);
 const reviewForm = document.getElementById("reviewForm");
 const collectionReviewReference = collection(firestore , "Reviews");
 const collectionProductsReference = collection(firestore , "Products");
@@ -496,37 +497,6 @@ const sendUserReviewAboutProduct = () => {
     });
 }
 
-//review validation
-export const reviewValidation = (data) => {
-
-    const validationResult = new Object();
-    validationResult.isValid = false;
-    validationResult.messageError = "";
-
-    const regexEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/i;
-    const emailValid = regexEmail.test(data.Email);
-
-
-    if(!data.Username){
-        validationResult.messageError = "username must be required..!!";
-    }
-    else if(!data.Email) {
-        validationResult.messageError = "email must be required..!!";
-    }
-    else if(!emailValid){
-        validationResult.messageError = "invalid email..!!";
-    }
-    else if(data.Message == "Gave us your feedback about this product..." || !data.Message) {
-        validationResult.messageError = "Message must be required..!!";
-    }
-    else
-    {
-        validationResult.isValid = true;
-        validationResult.messageError = "";
-    }
-
-    return validationResult
-}
 
 //handle Related products Slider
 const relatedSlider = () => {

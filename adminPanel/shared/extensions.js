@@ -58,23 +58,3 @@ export const confirmationAlert = (message , action) => {
 
 
 
-    //method to calculate rating and know from it how many stars filled will rendered..
-    export function calculateRating(value){
-        if(!isNaN(parseInt(value))){ //if number
-            let ratingValue = parseInt(value);
-            if(ratingValue > 250)
-            {
-                ratingValue = 250;
-            }
-
-            let numberOfFillStars = (ratingValue / 50); 
-            let numberOfFillStarsFloor = Math.floor(numberOfFillStars);
-
-            return {numberOfFillStarsFloor , numberOfFillStars};
-            
-        }
-        else
-        {
-            return {numberOfFillStarsFloor:0 , numberOfFillStars:0};   
-        }
-    }

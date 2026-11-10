@@ -1,12 +1,10 @@
 //imports
-import {deleteObject, getDownloadURL, getStorage , ref, uploadBytesResumable} from "firebase/storage"; //upload image to firebase
-import { addDoc, collection , deleteDoc, doc, getDoc, getFirestore , onSnapshot, updateDoc} from "firebase/firestore"; //store products
+import { addDoc, collection , deleteDoc, doc, getDoc, onSnapshot, updateDoc} from "firebase/firestore"; //store products
 import { getAllCategories } from "../../../categories/assets/js/categories";
-import {app} from "../../../../main"; //main
+import { firestore } from "../../../../main"; //main
+import { deleteFile, uploadFiles } from "../../../shared/storage"; //upload image to firebase
 
 //constants
-const firebaseStorage = getStorage(app);
-const firestore = getFirestore();
 const collectionReference = collection(firestore , "Products");
 
 const images = []; //store images after handling drag and drop method
@@ -539,67 +537,10 @@ export const generateErrorList = (errorList) => {
     document.querySelector(".errorList").appendChild(errorUl);
 }
 
-//handle upload product images
-export const uploadImages = (images) => {
+//handle upload product images: resolve with [{url, fullPath}] in the order they were selected
+export const uploadImages = (images) => uploadFiles("Products" , images);
 
-    return new Promise((resolve , reject) => {
-
-        const ImagesArr = [];
-
-        let counter = 0;
-    
-        images.forEach((img) => {
-    
-    
-            const storageReference = ref(firebaseStorage , `Products/${img.name}`)
-    
-            const metadata = {contentType : img.type};
-    
-            const uploadTask = uploadBytesResumable(storageReference , img , metadata);
-    
-            uploadTask.then((snapshot) => {
-    
-                getDownloadURL(storageReference).then((url) => {
-                    let imgObject = {url: url , fullPath: snapshot.metadata.fullPath};
-    
-                    ImagesArr.push(imgObject);
-    
-                    counter++;
-                    
-                    if(images.length == counter)
-                    {
-                        resolve(ImagesArr);
-                    }
-    
-                })
-                .catch((err) => {
-                    reject(err);
-                })
-    
-            })
-            .catch((err) => {
-                reject(err);
-            })
-    
-        });
-
-
-
-
-
-
-    });
-
-
-
-}
-
-export const deleteImage = (fullPath) => {
-    const firebaseStorage = getStorage(app);
-    const storgeReference = ref(firebaseStorage , fullPath);
-    deleteObject(storgeReference).then(() => {console.log("image deleted")})
-    .catch((err) => {console.log(err)})
-}
+export const deleteImage = deleteFile;
 
 
 export const getFormDataProduct = (form) =>{

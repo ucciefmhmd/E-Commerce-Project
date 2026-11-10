@@ -1,10 +1,9 @@
-import { addDoc, collection, doc, getDoc, getFirestore, updateDoc } from "firebase/firestore";
-import { app } from "../../main";
+import { addDoc, collection } from "firebase/firestore";
+import { firestore } from "../../main";
 import { increaseShoppingCartCounter } from "../../adminPanel/products/assets/js/product";
 
 
 //constants
-const firestore = getFirestore(app);
 const collectionOrdersReference = collection(firestore , "Orders");
 let shopping = [];
 

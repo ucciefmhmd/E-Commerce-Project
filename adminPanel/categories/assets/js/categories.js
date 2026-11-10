@@ -1,7 +1,7 @@
 import { getFormData } from "../../../shared/extensions"
 import {collection , addDoc , onSnapshot , getDocs , getDoc , query , where, doc , updateDoc} from "firebase/firestore";
-import {deleteObject, getDownloadURL, getStorage, ref, uploadBytesResumable} from "firebase/storage";
-import { app, firestore} from "../../../../main";
+import { deleteFile, uploadFile } from "../../../shared/storage";
+import { firestore } from "../../../../main";
 
 
 const collectionReference = collection(firestore , "Categories");
@@ -262,37 +262,7 @@ const validationCategory = (currentObject , updated) => {
 
 }
 
-//return url
-const uploadImage = (image) => {
+//upload category cover to Storage, resolve with {url, fullPath}
+const uploadImage = (image) => uploadFile("Categories" , image);
 
-    
-    return new Promise((resolve , reject) => {
-
-        const firebaseStorage = getStorage(app);
-        const storgeReference = ref(firebaseStorage , `Categories/${image.name}`);
-    
-        const metadata = {contentType:image.type};
-        const uploadTask = uploadBytesResumable(storgeReference , image , metadata);
-
-        uploadTask.then((snapshot) => {
-            getDownloadURL(storgeReference)
-            .then((url) => {
-
-                resolve({url: url , fullPath : snapshot.metadata.fullPath});
-
-            })
-            .catch((error) => {
-                reject(error);
-            });
-        });
-
-    });
-
-}
-
-export const deleteImage = (fullPath) => {
-    const firebaseStorage = getStorage(app);
-    const storgeReference = ref(firebaseStorage , fullPath);
-    deleteObject(storgeReference).then(() => {console.log("image deleted")})
-    .catch((err) => {console.log(err)})
-}
+const deleteImage = deleteFile;

@@ -1,12 +1,11 @@
 //imports
-import {collection, getFirestore , onSnapshot} from "firebase/firestore";
-import { app } from "../../main";
-import { calculateRating } from "../../adminPanel/shared/extensions";
+import {collection, onSnapshot} from "firebase/firestore";
+import { firestore } from "../../main";
+import { calculateRating } from "../../adminPanel/shared/helpers";
 import { addToCartHandle, addToWishlistHandle } from "../../adminPanel/products/assets/js/product";
 
 
 //constants
-const firestore = getFirestore(app);
 
 
 

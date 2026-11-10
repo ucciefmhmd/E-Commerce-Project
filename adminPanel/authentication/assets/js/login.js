@@ -3,8 +3,8 @@
 import { createUserWithEmailAndPassword, getAuth, signOut } from "firebase/auth";
 import {getAllUserOnlyTime } from "../../../users/assets/js/users";
 import { authenticationLogin } from "./authenticationModule";
-import { app } from "../../../../main";
-import { doc, getFirestore, setDoc } from "firebase/firestore";
+import { app, firestore } from "../../../../main";
+import { doc, setDoc } from "firebase/firestore";
 
 // Admin account used by the admin panel. Read from environment variables (see .env.example).
 // Note: anything bundled into browser JavaScript is visible to users; see README "Security notes".
@@ -13,7 +13,6 @@ const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD;
 
 
 const authentication = getAuth(app);
-const firestore = getFirestore();
 
 const authenticationLoginHandle = () => {
     seedingAdmin();

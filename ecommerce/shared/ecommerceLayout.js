@@ -1,11 +1,10 @@
 
-import { doc, getFirestore, onSnapshot} from "firebase/firestore";
-import { app } from "../../main";
+import { doc, onSnapshot} from "firebase/firestore";
+import { firestore } from "../../main";
 
 
 
 //handle dashboard methods
-const firestore = getFirestore(app);
 
 const layoutHandle = () => {
 

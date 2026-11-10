@@ -3,7 +3,7 @@ import moment from 'moment';
 import { doc, onSnapshot} from 'firebase/firestore';
 import { firestore } from '../../../../main';
 import { getFormData } from '../../../shared/extensions';
-import { authenticationValidation } from '../../../authentication/assets/js/authenticationModule';
+import { authenticationValidation } from '../../../shared/validation';
 import { changePasswordHandle } from './users';
 
 

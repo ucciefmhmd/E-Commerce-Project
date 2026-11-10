@@ -1,5 +1,5 @@
 //imports
-import {createProductHandle, deleteImage, getAllCategoriesToProduct, getSingleProductById, updateProductHandle, uploadImagesDragAndDrop, validationObserver } from "./product";
+import { getAllCategoriesToProduct, getSingleProductById, updateProductHandle, uploadImagesDragAndDrop, validationObserver } from "./product";
 
 //constants
 const productForm = document.getElementById("productForm");

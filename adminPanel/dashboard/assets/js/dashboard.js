@@ -1,13 +1,14 @@
-import { onAuthStateChanged , getAuth , signOut} from "firebase/auth";
+import { onAuthStateChanged , getAuth } from "firebase/auth";
 import {createCategory, getCategories , getSingleCategoriesById, toggleStatusCategory, updateCategory } from "../../../categories/assets/js/categories";
 import { confirmationAlert } from "../../../shared/extensions";
 import Swal from "sweetalert2";
-import { app} from "../../../../main";
+import { app, firestore } from "../../../../main";
 import { addSaleHandle, deleteProduct, getAllProducts, toggleStatusProduct } from "../../../products/assets/js/product";
 import { createUserHandle, getAllUser, getSingleUserById } from "../../../users/assets/js/users";
-import { doc, getFirestore, onSnapshot } from "firebase/firestore";
+import { doc, onSnapshot } from "firebase/firestore";
 import { getAllOrders, handleConfirmOrder } from "../../../orders/assets/js/orders";
 import { getCustomers } from "../../../customers/assets/js/customers";
+import { handleAdminDropdownToggle, handleAdminLogout, renderAdminDropdown } from "../../../shared/adminNavbar";
 
 //constants
 let updated = false;
@@ -16,14 +17,13 @@ let updated = false;
 const authentication = getAuth(app);
 const modelForm = document.getElementById("modalForm");
 const userForm = document.getElementById("userForm");
-const firestore = getFirestore();
 
 
 
 const dashboardHandle = () => {
 
     //check authentication login
-    authenticationLogout();
+    handleAdminLogout(authentication);
 
     //check if user in authentication login.
     onAuthStateChanged(authentication , (user) => {
@@ -37,41 +37,7 @@ const dashboardHandle = () => {
             //user
             const documentationReference = doc(firestore , "Users" , user.uid);
             onSnapshot(documentationReference , (snapshot) => {
-
-                const data = snapshot.data();
-
-                document.querySelector(".dropdown").innerHTML = 
-                `
-                <a class="text-decoration-none" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <div class="profile-info d-flex justify-content-center align-items-center" style="z-index:1000000">
-                        <div class="dropdown-info" style="padding:0px 20px; color: #000'">
-                            <p class="dropdown-username" style="padding-bottom:0px; margin-bottom:0px">Hey, <b class="b">${data.Username}</b></p>
-                            <small class="dropdown-role">${data.Role.toLowerCase()}</small>
-                        </div>
-                        <div class="profile-photo d-flex align-items-center">
-                            <img width="40" height="40" src="${!data.ProfileImage.imageUrl ? '../dashboard/assets/images/avatar.png' : data.ProfileImage.imageUrl}">
-                        </div>
-                    </div>
-                </a>
-                <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="/adminPanel/users/profile?id=${user.uid}">Profile</a></li>
-                <li><a class="dropdown-item" href="/adminPanel/users/changeEmail?id=${user.uid}">Change Email</a></li>
-                <li><a class="dropdown-item" href="/adminPanel/users/changePassword?id=${user.uid}">Change Password</a></li>
-                <li><a class="dropdown-item logout-btn" href="javascript:;">Logout</a></li>
-                </ul>
-                `
-
-                
-                if(localStorage.getItem("mode")) {
-                    if(localStorage.getItem("mode") === "dark")
-                    {
-                        document.querySelector(".dropdown-menu").classList.add("dropdown-menu-dark");                    
-                    }
-                    else
-                    {
-                        document.querySelector(".dropdown-menu").classList.remove("dropdown-menu-dark");                    
-                    }
-                }
+                renderAdminDropdown(snapshot.data() , user.uid);
             });
 
         }
@@ -83,14 +49,7 @@ const dashboardHandle = () => {
     });
 
 
-    document.body.addEventListener("click" , (event) => {
-
-        if(event.target.classList.contains("dropdown-info") || event.target.classList.contains("dropdown-role") || event.target.classList.contains("dropdown-username") || event.target.classList.contains("b")){
-            console.log("xxx")
-            document.querySelector(".dropdown-menu").classList.toggle("active");
-        }
-    
-    });
+    handleAdminDropdownToggle();
 
 
     //users
@@ -117,35 +76,6 @@ const dashboardHandle = () => {
     //orders
     getAllOrders();
     handleConfirmOrder();
-}
-
-
-
-
-const authenticationLogout = () => {
-
-    document.addEventListener("click" , async (event) => {
-
-        if(event.target.classList.contains("logout-btn")) {
-
-            console.log("logout");
-
-            try {
-
-                await signOut(authentication);
-                location.assign("/adminPanel/authentication/login");
-
-            }
-            catch(error) {
-
-                console.log(error);
-
-            }
-
-        }
-
-    });
-
 }
 
 

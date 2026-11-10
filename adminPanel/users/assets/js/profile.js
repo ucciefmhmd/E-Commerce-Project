@@ -2,7 +2,7 @@
 import moment from 'moment';
 import { getFormData } from '../../../shared/extensions';
 import { getSingleUserById, updateUserHandle } from './users';
-import { authenticationValidation } from '../../../authentication/assets/js/authenticationModule';
+import { authenticationValidation } from '../../../shared/validation';
 import { doc, onSnapshot} from 'firebase/firestore';
 import { firestore } from '../../../../main';
 
