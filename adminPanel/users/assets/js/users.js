@@ -5,6 +5,12 @@ import { authenticationValidation } from "../../../authentication/assets/js/auth
 import {createUserWithEmailAndPassword , getAuth, signInWithEmailAndPassword ,verifyBeforeUpdateEmail , updatePassword, signInWithCredential, signOut} from "firebase/auth";
 import { deleteObject, getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
 
+// Admin account used by the admin panel. Read from environment variables (see .env.example).
+// Note: anything bundled into browser JavaScript is visible to users; see README "Security notes".
+const ADMIN_EMAIL = import.meta.env.VITE_ADMIN_EMAIL;
+const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD;
+
+
 //constants
 const authetication = getAuth(app);
 
@@ -47,7 +53,7 @@ export const createUserHandle = async (form) => { //login user
                     try{
                         setDoc(documentReference , currentObject)
                         .then(async() => {
-                            signInWithEmailAndPassword(authetication , "admin@example.com" , "REDACTED_PASSWORD")
+                            signInWithEmailAndPassword(authetication , ADMIN_EMAIL , ADMIN_PASSWORD)
                             .then(() => {
                                 resolve({done: true , err : ""});
                             })

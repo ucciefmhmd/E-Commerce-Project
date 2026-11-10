@@ -6,6 +6,12 @@ import { authenticationLogin } from "./authenticationModule";
 import { app } from "../../../../main";
 import { doc, getFirestore, setDoc } from "firebase/firestore";
 
+// Admin account used by the admin panel. Read from environment variables (see .env.example).
+// Note: anything bundled into browser JavaScript is visible to users; see README "Security notes".
+const ADMIN_EMAIL = import.meta.env.VITE_ADMIN_EMAIL;
+const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD;
+
+
 const authentication = getAuth(app);
 const firestore = getFirestore();
 
@@ -21,16 +27,16 @@ const seedingAdmin = async() => {
     const Users = await getAllUserOnlyTime()
 
     let emailExisted = Users.some((user) => {
-        return user.Email.toLowerCase() === "admin@example.com".toLocaleLowerCase();
+        return user.Email.toLowerCase() === ADMIN_EMAIL.toLocaleLowerCase();
     });
 
     if(!emailExisted){
-        createUserWithEmailAndPassword(authentication , "admin@example.com" , "REDACTED_PASSWORD").then(async(credential) =>{
+        createUserWithEmailAndPassword(authentication , ADMIN_EMAIL , ADMIN_PASSWORD).then(async(credential) =>{
 
             const currentObject = new Object();
 
             currentObject.Username = "adminITI";
-            currentObject.Email = "admin@example.com";
+            currentObject.Email = ADMIN_EMAIL;
             currentObject.CreateAt = `${new Date()}`;
             currentObject.LastUpdatedAt = "";
             currentObject.ProfileImage = {imageUrl: "" , fullPath:""};

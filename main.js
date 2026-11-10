@@ -5,13 +5,14 @@ import { getFirestore } from "firebase/firestore";
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
+// Values come from environment variables (see .env.example); nothing is hard-coded in source.
 const firebaseConfig = {
-  apiKey: "REDACTED",
-  authDomain: "ecommerce-finalapp.firebaseapp.com",
-  projectId: "ecommerce-finalapp",
-  storageBucket: "ecommerce-finalapp.appspot.com",
-  messagingSenderId: "REDACTED",
-  appId: "REDACTED"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID
 };
 
 // Initialize Firebase
