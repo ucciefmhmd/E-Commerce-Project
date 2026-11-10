@@ -66,6 +66,15 @@ export const getCartTotal = (items) => {
 };
 
 
+//price cell used by the cart and wishlist tables: struck-through old price + discounted price, or just the price
+export const renderPriceHtml = (product) => {
+    const price = escapeHtml(product.Price);
+    return product.HasDiscount
+        ? ` <span style="text-decoration: line-through; color:#F00">${price}.00 EPG</span> <span style="color:#080">${escapeHtml(getPriceAfterDiscount(product.Price , product.DiscountVal))}.00EPG</span>`
+        : `<span style="">${price}.00 EPG</span>`;
+};
+
+
 //---------------------------------------------------------------- rating
 
 //Products store `Rating` as a running total (every review adds 1-5 and every

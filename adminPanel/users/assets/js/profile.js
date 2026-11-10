@@ -5,6 +5,7 @@ import { getSingleUserById, updateUserHandle } from './users';
 import { authenticationValidation } from '../../../shared/validation';
 import { doc, onSnapshot} from 'firebase/firestore';
 import { firestore } from '../../../../main';
+import { safeUrl } from '../../../shared/helpers';
 
 
 let params = new URLSearchParams(location.search);
@@ -34,7 +35,7 @@ const getCurrentUser = async() => {
 
         if(user.ProfileImage.imageUrl)
         {
-            document.querySelector(".card-img img").src = user.ProfileImage.imageUrl;
+            document.querySelector(".card-img img").src = safeUrl(user.ProfileImage.imageUrl , "assets/images/avatar.png");
         }
         else
         {

@@ -1,7 +1,8 @@
 import { addDoc, collection, doc, onSnapshot, updateDoc } from "firebase/firestore";
 import { addToCartHandle, addToWishlistHandle, getSingleProductById } from "../../adminPanel/products/assets/js/product";
 import { getFormData } from "../../adminPanel/shared/extensions";
-import { calculateRating } from "../../adminPanel/shared/helpers";
+import { escapeHtml, escapeUrl, renderRatingStars, safeUrl } from "../../adminPanel/shared/helpers";
+import { sanitizeHtml } from "../../adminPanel/shared/sanitize";
 import { reviewValidation } from "../../adminPanel/shared/validation";
 import { firestore } from "../../main";
 
@@ -49,36 +50,20 @@ const displayTargetProduct = async() => {
 
         let smallImgListItems = "";
 
-        //loop on product of images to create small images
+        //loop on product of images to create small images (first item gets the active class)
         product.Images.forEach((img , index) => {
 
-            if(index == 0) //to set active class on first item
-            {
-                smallImgListItems +=
-                `
-        
-                    <li class="small-image-item active">
-                        <img class="small-img" src=${img.url} alt="small" data-index=${index}>
-                    </li>
-        
-                `
-            }
-            else
-            {
-                smallImgListItems += 
-                `
-                <li class="small-image-item">
-                    <img class="small-img" src=${img.url} alt="small" data-index=${index}>
-                </li>
-                `
-            }
-
-
+            smallImgListItems +=
+            `
+            <li class="small-image-item${index == 0 ? " active" : ""}">
+                <img class="small-img" src="${escapeUrl(img.url)}" alt="small" data-index="${index}">
+            </li>
+            `
 
         });
 
         document.querySelector(".small-images-list").innerHTML = smallImgListItems;
-        document.getElementById("previewImage").src = product.Images[0].url;
+        document.getElementById("previewImage").src = safeUrl(product.Images[0].url);
 
         //handle product information
         document.querySelector(".product-name").textContent = product.Name;
@@ -86,21 +71,8 @@ const displayTargetProduct = async() => {
 
 
         //handle rating stars...
-        let numOfStars = calculateRating(parseInt(product.Rating));
-
-        let stars = ""; 
-
-        for (let index = 0; index < 5; index++) {
-
-            if(numOfStars.numberOfFillStarsFloor != 0) {
-                stars += `<img src="/images/Filled_star.png" class="raiting" alt="raiting">`;
-                numOfStars.numberOfFillStarsFloor--;
-            }
-            else
-            {
-                stars += `<img src="/images/empty_star.png" class="raiting" alt="raiting">`;
-            }
-        };
+        const rating = renderRatingStars(product.Rating);
+        const stars = rating.html;
 
         document.querySelector(".product-rating").innerHTML = stars;
         
@@ -118,7 +90,7 @@ const displayTargetProduct = async() => {
         }
 
         //handle small Description
-        document.querySelector(".product-description").innerHTML = product.Description;
+        document.querySelector(".product-description").innerHTML = sanitizeHtml(product.Description);
 
         //handle Price
         document.querySelector(".price-val").textContent = product.Price;
@@ -159,11 +131,11 @@ const displayTargetProduct = async() => {
 
         
         //handle description tab
-        document.getElementById("tabProductDescription").innerHTML = product.Description;
+        document.getElementById("tabProductDescription").innerHTML = sanitizeHtml(product.Description);
 
         //handle review product name tab
-        document.querySelector(".review-Product-name").innerHTML = product.Name.substring(0 , 50) + '...';
-        document.querySelector(".current-Rating-stars").innerHTML = `${stars} (${numOfStars.numberOfFillStars})`;
+        document.querySelector(".review-Product-name").textContent = product.Name.substring(0 , 50) + '...';
+        document.querySelector(".current-Rating-stars").innerHTML = `${stars} (${escapeHtml(rating.value)})`;
 
     });
 
@@ -412,7 +384,6 @@ raitingImages.forEach((element , index) => {
 
         ratingCurrentIndex = myIndex;
 
-        console.log(ratingCurrentIndex)
 
     })
 });
@@ -565,39 +536,25 @@ const setupRelatedProducts = (products) => {
     products.forEach((product) => {
        
         //handle rating stars...
-        let numOfStars = calculateRating(parseInt(product.Rating));
-
-        let stars = ""; 
-
-        for (let index = 0; index < 5; index++) {
-
-            if(numOfStars.numberOfFillStarsFloor != 0) {
-                stars += `<img src="/images/Filled_star.png" class="raiting" alt="raiting">`;
-                numOfStars.numberOfFillStarsFloor--;
-            }
-            else
-            {
-                stars += `<img src="/images/empty_star.png" class="raiting" alt="raiting">`;
-            }
-        };
+        const rating = renderRatingStars(product.Rating);
 
         relatedProductsCartona +=
         `
         <li class="card">
-            <div class="img"><img src="${product.Images[0].url}" alt="img" draggable="false"></div>
+            <div class="img"><img src="${escapeUrl(product.Images[0].url)}" alt="img" draggable="false"></div>
             <div class="descOfProduct">
-                <p class="productCategory">${product.Category}</p>
+                <p class="productCategory">${escapeHtml(product.Category)}</p>
                 <p class="productName">
-                    <a href="../productDetails/productDetails?id=${product.id}" title="${product.Name}">${product.Name}</a>
+                    <a href="../productDetails/productDetails?id=${encodeURIComponent(product.id)}" title="${escapeHtml(product.Name)}">${escapeHtml(product.Name)}</a>
                 </p>
                 <div class="rating">
                     <div class="rating-container">
-                        ${stars}
+                        ${rating.html}
                     </div>
-                    <span class="rating-value">(${numOfStars.numberOfFillStars})</span>
+                    <span class="rating-value">(${escapeHtml(rating.value)})</span>
                 </div>
 
-                <p class="productPrice">${product.Price}.00 EPG</p>
+                <p class="productPrice">${escapeHtml(product.Price)}.00 EPG</p>
             </div>
         </li>
         `

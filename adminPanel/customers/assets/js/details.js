@@ -1,4 +1,5 @@
 import { getSingleCustomerById } from "./customers";
+import { escapeHtml, getPriceAfterDiscount } from "../../../shared/helpers";
 
 
 let params = new URLSearchParams(location.search);
@@ -18,22 +19,23 @@ const displayCustomerDetails = async () => {
 
     //handle history Sales Table
     customer.HistorySales.forEach(salesItem => {
-        
+
+        const lineTotal = salesItem.HasDiscount ? getPriceAfterDiscount(salesItem.Price , salesItem.DiscountVal) * parseInt(salesItem.quantityOrder) : parseInt(salesItem.Price) * parseInt(salesItem.quantityOrder);
 
         historySalesCartona += `
-        
+
 
         <tr>
             <td>
-                <a href="/ecommerce/productDetails/productDetails?id=${salesItem.id}" title=${salesItem.Name}>${salesItem.Name.substring(0 , 30)}</a>
+                <a href="/ecommerce/productDetails/productDetails?id=${encodeURIComponent(salesItem.id)}" title="${escapeHtml(salesItem.Name)}">${escapeHtml(salesItem.Name.substring(0 , 30))}</a>
             </td>
-            <td>${salesItem.Price}.00EPG</td>
+            <td>${escapeHtml(salesItem.Price)}.00EPG</td>
             <td>
-                <span class="item-number">${salesItem.quantityOrder}</span>
+                <span class="item-number">${escapeHtml(salesItem.quantityOrder)}</span>
             </td>
             <td>
                 <span class="sum-total">
-                    ${salesItem.HasDiscount ? getPriceAfterDiscount(salesItem.Price , salesItem.DiscountVal) * parseInt(salesItem.quantityOrder) : parseInt(salesItem.Price) * parseInt(salesItem.quantityOrder)}.00EPG
+                    ${escapeHtml(lineTotal)}.00EPG
                 </span>
             </td>
         </tr>
@@ -48,16 +50,6 @@ const displayCustomerDetails = async () => {
     document.querySelector(".hsitorySales-container").innerHTML =  historySalesCartona;
 
 
-}
-
-//handle price after discount
-const getPriceAfterDiscount = (productPrice , disValue) => {
-    let discountValue = parseInt(disValue);
-    let discountValuePercentage = (discountValue / 100);
-    let discountValueAfterSale = (discountValuePercentage * productPrice);
-    let currentPriceAfterDiscount = (productPrice - discountValueAfterSale);
-    productPrice = currentPriceAfterDiscount;
-    return productPrice;
 }
 
 

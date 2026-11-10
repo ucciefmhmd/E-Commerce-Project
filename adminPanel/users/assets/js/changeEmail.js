@@ -2,6 +2,7 @@
 import moment from 'moment';
 import { doc, onSnapshot} from 'firebase/firestore';
 import { firestore } from '../../../../main';
+import { safeUrl } from '../../../shared/helpers';
 import { getFormData } from '../../../shared/extensions';
 import { authenticationValidation } from '../../../shared/validation';
 import { changeEmailHandle } from './users';
@@ -33,7 +34,7 @@ const getCurrentUser = async() => {
 
         if(user.ProfileImage)
         {
-            document.querySelector(".card-img img").src = (user.ProfileImage.imageUrl ? user.ProfileImage.imageUrl : "/images/avatar.png");
+            document.querySelector(".card-img img").src = safeUrl(user.ProfileImage.imageUrl , "/images/avatar.png");
         }
         else
         {

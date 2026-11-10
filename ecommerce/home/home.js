@@ -1,7 +1,7 @@
 //imports
 import {collection, onSnapshot} from "firebase/firestore";
 import { firestore } from "../../main";
-import { calculateRating } from "../../adminPanel/shared/helpers";
+import { escapeHtml, escapeUrl, getPriceAfterDiscount, renderRatingStars } from "../../adminPanel/shared/helpers";
 import { addToCartHandle, addToWishlistHandle } from "../../adminPanel/products/assets/js/product";
 
 
@@ -52,7 +52,7 @@ const getCategoriesData = () => {
 }
 
 
-//setup categories in home 
+//setup categories in home
 const setupCategories = (categories) => {
 
     document.querySelector(".carousel2").innerHTML = ``;
@@ -61,23 +61,21 @@ const setupCategories = (categories) => {
 
     categories.forEach((category) => {
 
+        const name = escapeHtml(category.Name);
 
         categoriesCartona +=
         `
-            <li class="cardCategory" data-name="${category.Name}">
-                <div class="img"><img class="img-thumbnail js-category-img" src=${category.Image[0].url} data-name="${category.Name}" alt="img" draggable="false"></div>
-                <h3 class="js-category-heading" data-name="${category.Name}">${category.Name}</h3>
+            <li class="cardCategory" data-name="${name}">
+                <div class="img"><img class="img-thumbnail js-category-img" src="${escapeUrl(category.Image[0].url)}" data-name="${name}" alt="img" draggable="false"></div>
+                <h3 class="js-category-heading" data-name="${name}">${name}</h3>
             </li>
-        
+
         `
 
     });
 
 
     document.querySelector(".carousel2").innerHTML = categoriesCartona;
-
-
-
 
 }
 
@@ -120,7 +118,7 @@ const getProductsData = () => {
 }
 
 
-//setup products in home 
+//setup products in home
 const setupAllProducts = (products) => {
 
     document.querySelector(".carousel").innerHTML = ``;
@@ -129,44 +127,29 @@ const setupAllProducts = (products) => {
 
     products.forEach((product) => {
 
-
-        //handle rating stars...
-        let numOfStars = calculateRating(parseInt(product.Rating));
-
-        let stars = ""; 
-
-        for (let index = 0; index < 5; index++) {
-
-            if(numOfStars.numberOfFillStarsFloor != 0) {
-                stars += `<img src="/images/Filled_star.png" class="raiting" alt="raiting">`;
-                numOfStars.numberOfFillStarsFloor--;
-            }
-            else
-            {
-                stars += `<img src="/images/empty_star.png" class="raiting" alt="raiting">`;
-            }
-        };
+        const id = escapeHtml(product.id);
+        const urlId = encodeURIComponent(product.id);
 
         productsCartona +=
         `
         <li class="card">
             <div class="twoIcons">
-                <p class="iconOnImage"><a href="javascript:;"><i class="fa-regular fa-heart js-add-wishlist" data-id=${product.id}></i></a></p>
-                <p class="iconOnImage"><a href="/ecommerce/productDetails/productDetails?id=${product.id}"><i class="fa-regular fa-eye"></i></a></p>
-                <p class="iconOnImage"><a  href="javascript:; "><i class="fa-brands fa-shopify js-add-cart" data-id=${product.id}></i></a></p>
+                <p class="iconOnImage"><a href="javascript:;"><i class="fa-regular fa-heart js-add-wishlist" data-id="${id}"></i></a></p>
+                <p class="iconOnImage"><a href="/ecommerce/productDetails/productDetails?id=${urlId}"><i class="fa-regular fa-eye"></i></a></p>
+                <p class="iconOnImage"><a  href="javascript:; "><i class="fa-brands fa-shopify js-add-cart" data-id="${id}"></i></a></p>
             </div>
-            <div class="img"><img src="${product.Images[0].url}" alt="img" draggable="false" ></div>
+            <div class="img"><img src="${escapeUrl(product.Images[0].url)}" alt="img" draggable="false" ></div>
             <div class="descOfProduct">
-                <p class="productCategory">${product.Category}</p>
+                <p class="productCategory">${escapeHtml(product.Category)}</p>
                 <p class="productName">
-                <a href="ecommerce/productDetails/productDetails?id=${product.id}" title="${product.Name}">${product.Name.substring(0 , 60)}...</a>
+                <a href="ecommerce/productDetails/productDetails?id=${urlId}" title="${escapeHtml(product.Name)}">${escapeHtml(product.Name.substring(0 , 60))}...</a>
                 </p>
-                <p class="rating">${stars}</p>
-                <p class="productPrice">${product.Price}.00 EPG</p>
+                <p class="rating">${renderRatingStars(product.Rating).html}</p>
+                <p class="productPrice">${escapeHtml(product.Price)}.00 EPG</p>
             </div>
         </li>
-        
-        `   
+
+        `
 
     });
 
@@ -176,7 +159,7 @@ const setupAllProducts = (products) => {
 }
 
 
-//setup best seller products in home 
+//setup best seller products in home
 const setupBestSellerProducts = (products) => {
 
     document.querySelector(".carousel-seller").innerHTML = ``;
@@ -186,37 +169,21 @@ const setupBestSellerProducts = (products) => {
 
     products.forEach((product) => {
 
-        //handle rating stars...
-        let numOfStars = calculateRating(parseInt(product.Rating));
-
-        let stars = ""; 
-
-        for (let index = 0; index < 5; index++) {
-
-            if(numOfStars.numberOfFillStarsFloor != 0) {
-                stars += `<img src="/images/Filled_star.png" class="raiting" alt="raiting">`;
-                numOfStars.numberOfFillStarsFloor--;
-            }
-            else
-            {
-                stars += `<img src="/images/empty_star.png" class="raiting" alt="raiting">`;
-            }
-        };
         productsBestCartona +=
         `
         <li class="card">
-            <div class="img"><img src="${product.Images[0].url}" alt="img" draggable="false" ></div>
+            <div class="img"><img src="${escapeUrl(product.Images[0].url)}" alt="img" draggable="false" ></div>
             <div class="descOfProduct">
-                <p class="productCategory">${product.Category}</p>
+                <p class="productCategory">${escapeHtml(product.Category)}</p>
                 <p class="productName">
-                <a href="ecommerce/productDetails/productDetails?id=${product.id}" title="${product.Name}">${product.Name.substring(0 , 60)}...</a>
+                <a href="ecommerce/productDetails/productDetails?id=${encodeURIComponent(product.id)}" title="${escapeHtml(product.Name)}">${escapeHtml(product.Name.substring(0 , 60))}...</a>
                 </p>
-                <p class="rating">${stars}</p>
-                <p class="productPrice">${product.Price}.00 EPG</p>
+                <p class="rating">${renderRatingStars(product.Rating).html}</p>
+                <p class="productPrice">${escapeHtml(product.Price)}.00 EPG</p>
             </div>
         </li>
-        
-        `   
+
+        `
 
     });
 
@@ -226,7 +193,7 @@ const setupBestSellerProducts = (products) => {
 
 }
 
-//setup best seller products in home 
+//setup sale products in home
 const setupSaleProducts = (products) => {
 
     const specialOfferArray = products.filter((product) => {return product.DiscountVal >= 50 && product.Status});
@@ -237,28 +204,28 @@ const setupSaleProducts = (products) => {
     if(specialOffer != undefined){
 
         //setup special offer
-        document.querySelector(".special-offer-container").innerHTML = 
+        document.querySelector(".special-offer-container").innerHTML =
         `
-        
+
             <div class="special-offer">
                 <div class="special-offer-details">
                     <h4>Special <br> Offer</h4>
-                    <p>Save ${specialOffer.DiscountVal}%</p>
+                    <p>Save ${escapeHtml(specialOffer.DiscountVal)}%</p>
                 </div>
                 <div class="special-offer-cover">
-                    <img src="${specialOffer.Images[0].url}" alt="special-offer" width="320">
+                    <img src="${escapeUrl(specialOffer.Images[0].url)}" alt="special-offer" width="320">
                 </div>
                 <div class="special-offer-information">
                     <div class="special-offer-name">
-                        <a href="/ecommerce/productDetails/productDetails?id=${specialOffer.id}">${specialOffer.Name.substring(0 , 60)}...</a>
+                        <a href="/ecommerce/productDetails/productDetails?id=${encodeURIComponent(specialOffer.id)}">${escapeHtml(specialOffer.Name.substring(0 , 60))}...</a>
                     </div>
                     <div class="special-offer-price">
-                        <span class="special-old-price">${specialOffer.Price}.00EPG</span>
-                        <span class="special-new-price">${getPriceAfterDiscount(specialOffer.Price , specialOffer.DiscountVal)}.00EPG</span>
+                        <span class="special-old-price">${escapeHtml(specialOffer.Price)}.00EPG</span>
+                        <span class="special-new-price">${escapeHtml(getPriceAfterDiscount(specialOffer.Price , specialOffer.DiscountVal))}.00EPG</span>
                     </div>
                     <div class="special-offer-metter">
                         <div>
-                            <span>Available: ${specialOffer.Quantity}</span>
+                            <span>Available: ${escapeHtml(specialOffer.Quantity)}</span>
                         </div>
                         <div class="special-metter">
                             <div class="counter"></div>
@@ -270,16 +237,16 @@ const setupSaleProducts = (products) => {
                     </div>
                 </div>
             </div>
-    
-    
+
+
         `
 
-        
+
     }
     else
     {
                 //setup special offer
-        document.querySelector(".special-offer-container").innerHTML = 
+        document.querySelector(".special-offer-container").innerHTML =
         `
         <div class="special-offer" style="position:relative; overflow:hidden">
             <div class="soon">Comming Soon...!!!</div>
@@ -308,7 +275,7 @@ const setupSaleProducts = (products) => {
                     </div>
             </div>
         </div>
-    
+
         `
     }
 
@@ -316,50 +283,29 @@ const setupSaleProducts = (products) => {
     document.querySelector(".sale-items-container").innerHTML = ``;
 
     let productsSaleCartona = ``;
-    
-    if(products.length > 0) {
 
-        products.forEach((product) => {
-            //handle rating stars...
-            let numOfStars = calculateRating(parseInt(product.Rating));
-    
-            let stars = ""; 
-    
-            for (let index = 0; index < 5; index++) {
-    
-                if(numOfStars.numberOfFillStarsFloor != 0) {
-                    stars += `<img src="/images/Filled_star.png" class="raiting" alt="raiting">`;
-                    numOfStars.numberOfFillStarsFloor--;
-                }
-                else
-                {
-                    stars += `<img src="/images/empty_star.png" class="raiting" alt="raiting">`;
-                }
-            };
-            productsSaleCartona +=
-            `
-            <div class="sale-item">
-                <div class="sale-item-details">
-                    <p class="sale-item-category">${product.Category}</p>
-                    <h4 class="sale-item-name">
-                        <a href="/ecommerce/productDetails/productDetails?id=${product.id}">${product.Name.substring(0 , 40)}...</a>
-                    </h4>
-                </div>
-                <div class="sale-item-cover">
-                    <img src="${product.Images[0].url}" alt="">
-                </div>
-                <div class="sale-item-price">
-                    <span class="sale-item-price-badge">${product.Price}.00EPG</span>
-                    <span class="sale-item-price-icon"><i class=" js-add-cart fa-solid fa-cart-plus" data-id="${product.id}"></i></span>
-                </div>
+    products.forEach((product) => {
+        productsSaleCartona +=
+        `
+        <div class="sale-item">
+            <div class="sale-item-details">
+                <p class="sale-item-category">${escapeHtml(product.Category)}</p>
+                <h4 class="sale-item-name">
+                    <a href="/ecommerce/productDetails/productDetails?id=${encodeURIComponent(product.id)}">${escapeHtml(product.Name.substring(0 , 40))}...</a>
+                </h4>
             </div>
-            
-            `   
-    
-        });
-    
+            <div class="sale-item-cover">
+                <img src="${escapeUrl(product.Images[0].url)}" alt="">
+            </div>
+            <div class="sale-item-price">
+                <span class="sale-item-price-badge">${escapeHtml(product.Price)}.00EPG</span>
+                <span class="sale-item-price-icon"><i class=" js-add-cart fa-solid fa-cart-plus" data-id="${escapeHtml(product.id)}"></i></span>
+            </div>
+        </div>
 
-    }
+        `
+
+    });
 
     document.querySelector(".sale-items-container").innerHTML = productsSaleCartona;
 
@@ -378,16 +324,6 @@ const displayByCategory = () => {
     })
 }
 
-
-//handle price after discount
-const getPriceAfterDiscount = (productPrice , disValue) => {
-    let discountValue = parseInt(disValue);
-    let discountValuePercentage = (discountValue / 100);
-    let discountValueAfterSale = (discountValuePercentage * productPrice);
-    let currentPriceAfterDiscount = (productPrice - discountValueAfterSale);
-    productPrice = currentPriceAfterDiscount;
-    return productPrice;
-}
 
 
 const addToCart = () => {

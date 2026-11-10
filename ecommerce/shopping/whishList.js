@@ -1,5 +1,6 @@
 import { addToCartHandle } from "../../adminPanel/products/assets/js/product";
 import {increaseFavCounter} from "../../adminPanel/products/assets/js/product";
+import { escapeHtml, escapeUrl, renderPriceHtml } from "../../adminPanel/shared/helpers";
 let wishlist = [];
 
 //handle wishlist
@@ -24,31 +25,33 @@ const setupWishlist = (wishlist) => {
     document.querySelector(".wishListContainer").innerHTML = "";
     let wishlistProductCartona = "";
     wishlist.forEach(product => {
-        
+
+        const id = escapeHtml(product.id);
+
         wishlistProductCartona += `
-        
+
             <tr>
                 <td>
                     <div class="product-details d-flex justify-content-start align-items-center" style="gap: 10px; padding:0px 30px ;">
-                        <img src="${product.Images[0].url}" alt="" class="img-thumbnail" style="width: 50px; height: 50px; border-radius: 50%;">
+                        <img src="${escapeUrl(product.Images[0].url)}" alt="" class="img-thumbnail" style="width: 50px; height: 50px; border-radius: 50%;">
                         <div class="product-info">
-                            <p class="product-name" title="${product.Name}">${product.Name.substring(0 , 50)}...</p>
-                            <small class="product-category text-muted">${product.Category}</small>
+                            <p class="product-name" title="${escapeHtml(product.Name)}">${escapeHtml(product.Name.substring(0 , 50))}...</p>
+                            <small class="product-category text-muted">${escapeHtml(product.Category)}</small>
                         </div>
                     </div>
                 </td>
                 <td>
-                    ${product.Brand}
+                    ${escapeHtml(product.Brand)}
                 </td>
                 <td>
-                    ${product.HasDiscount ? ` <span style="text-decoration: line-through; color:#F00">${product.Price}.00 EPG</span> <span style="color:#080">${getPriceAfterDiscount(product.Price , product.DiscountVal)}.00EPG</span>` :`<span style="">${product.Price}.00 EPG</span>`}
+                    ${renderPriceHtml(product)}
                 </td>
                 <td class="Actions">
-                    <button class="btn btn-danger btn-sm js-delete-wishlist" data-id="${product.id}">Delete</button>
-                    <button class="btn btn-success btn-sm js-add-cart-from-wishlist" data-id="${product.id}">Add To cart</button>
+                    <button class="btn btn-danger btn-sm js-delete-wishlist" data-id="${id}">Delete</button>
+                    <button class="btn btn-success btn-sm js-add-cart-from-wishlist" data-id="${id}">Add To cart</button>
                 </td>
             </tr>
-        
+
         `
 
 
@@ -112,15 +115,6 @@ const addToCartFromWishlist = () => {
 
 }
 
-//handle price after discount
-const getPriceAfterDiscount = (productPrice , disValue) => {
-    let discountValue = parseInt(disValue);
-    let discountValuePercentage = (discountValue / 100);
-    let discountValueAfterSale = (discountValuePercentage * productPrice);
-    let currentPriceAfterDiscount = (productPrice - discountValueAfterSale);
-    productPrice = currentPriceAfterDiscount;
-    return productPrice;
-}
 
 
 

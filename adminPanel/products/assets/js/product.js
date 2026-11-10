@@ -140,8 +140,8 @@ export const uploadImagesDragAndDrop = () => {
             cartona += 
             `
             <div class="image" style="margin-right:5px">
-                <img src=${URL.createObjectURL(img)} alt="image">
-                <span class="deleteImg" data-index=${index}>&times;</span>
+                <img src="${URL.createObjectURL(img)}" alt="image">
+                <span class="deleteImg" data-index="${index}">&times;</span>
             </div>
             `
 
@@ -692,7 +692,7 @@ export const addToWishlistHandle = async(id) => {
     {
         
         localStorage.setItem("wishlistCart" , JSON.stringify([currentProduct]));
-        document.getElementById("favBadge").innerHTML = 1;
+        document.getElementById("favBadge").textContent = 1;
     }
 }
 
@@ -734,7 +734,7 @@ export const addToCartHandle = async (id) => {
     {
         
         localStorage.setItem("shoppingCart" , JSON.stringify([currentProduct]));
-        document.getElementById("cartBagBadge").innerHTML = 1;
+        document.getElementById("cartBagBadge").textContent = 1;
     }
 }
 
@@ -743,7 +743,7 @@ export const increaseFavCounter = (favoriteArr) => {
 
     let count = favoriteArr.length;
 
-    document.getElementById("favBadge").innerHTML = count;
+    document.getElementById("favBadge").textContent = count;
 
 }
 
@@ -752,6 +752,6 @@ export const increaseShoppingCartCounter = (shoppingCartArr) => {
 
     let count = shoppingCartArr.length;
 
-    document.getElementById("cartBagBadge").innerHTML = count;
+    document.getElementById("cartBagBadge").textContent = count;
 
 }

@@ -9,6 +9,7 @@ import { doc, onSnapshot } from "firebase/firestore";
 import { getAllOrders, handleConfirmOrder } from "../../../orders/assets/js/orders";
 import { getCustomers } from "../../../customers/assets/js/customers";
 import { handleAdminDropdownToggle, handleAdminLogout, renderAdminDropdown } from "../../../shared/adminNavbar";
+import { safeUrl } from "../../../shared/helpers";
 
 //constants
 let updated = false;
@@ -138,7 +139,7 @@ const showCategoryModal = () => {
             const updatedCategory = await getSingleCategoriesById(event.target.dataset.id);
 
 
-            document.getElementById("previewImg").src = updatedCategory.Image[0].url;
+            document.getElementById("previewImg").src = safeUrl(updatedCategory.Image[0].url);
 
             
             document.getElementById("validationCategorySpan").textContent = "";

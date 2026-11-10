@@ -1,6 +1,7 @@
 
 import { doc, onSnapshot} from "firebase/firestore";
 import { firestore } from "../../main";
+import { escapeHtml } from "../../adminPanel/shared/helpers";
 
 
 
@@ -19,10 +20,10 @@ const layoutHandle = () => {
             const data = {id:snapshot.id , ...snapshot.data()};
               document.querySelector(".dropdown").innerHTML = 
              `
-                 <span class="span-username">Hello , ${data.Username}</span>
-                 <h5 class="span-email">${data.Email}</h5>
+                 <span class="span-username">Hello , ${escapeHtml(data.Username)}</span>
+                 <h5 class="span-email">${escapeHtml(data.Email)}</h5>
                  <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="/ecommerce/profile/profile?id=${data.id}">Profile</a></li>
+                    <li><a class="dropdown-item" href="/ecommerce/profile/profile?id=${encodeURIComponent(data.id)}">Profile</a></li>
                      <li><a class="dropdown-item js-logout-btn" href="javascript:;">Logout</a></li>
                  </ul>
     

@@ -196,7 +196,7 @@ document.querySelector(".js-register-btn").addEventListener("click" , async(even
             }
             catch(error)
             {
-                document.getElementById("validationRegisterSpan").innerHTML = error;
+                document.getElementById("validationRegisterSpan").textContent = error;
             }
         }
         else

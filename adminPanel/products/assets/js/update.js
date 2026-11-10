@@ -1,5 +1,6 @@
 //imports
 import { getAllCategoriesToProduct, getSingleProductById, updateProductHandle, uploadImagesDragAndDrop, validationObserver } from "./product";
+import { escapeUrl, safeUrl } from "../../../shared/helpers";
 
 //constants
 const productForm = document.getElementById("productForm");
@@ -58,7 +59,7 @@ const prepareProductUpdateForm = async(form , id) => {
     productForm.Quantity.value = currentObject.Quantity;
     tinyMCE.activeEditor.setContent(currentObject.Description);
     
-    document.getElementById("previewImg").src = currentObject.Images[0].url;
+    document.getElementById("previewImg").src = safeUrl(currentObject.Images[0].url);
 
     let cartona = "";
 
@@ -67,7 +68,7 @@ const prepareProductUpdateForm = async(form , id) => {
         cartona += 
         `
         <div class="image">
-            <img src=${img.url} alt="image">
+            <img src="${escapeUrl(img.url)}" alt="image">
         </div>
         `
 

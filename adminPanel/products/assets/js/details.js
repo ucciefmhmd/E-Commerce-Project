@@ -1,5 +1,7 @@
 import moment from "moment";
 import { getSingleProductById } from "./product";
+import { escapeUrl, renderRatingStars, safeUrl } from "../../../shared/helpers";
+import { sanitizeHtml } from "../../../shared/sanitize";
 
 let params = new URLSearchParams(location.search);
 const id = params.get('id');
@@ -33,82 +35,27 @@ const displayTargetProduct = async() => {
 
     let smallImgListItems = "";
 
-    //loop on product of images to create small images
+    //loop on product of images to create small images (first item gets the active class)
     product.Images.forEach((img , index) => {
 
-        if(index == 0) //to set active class on first item
-        {
-            smallImgListItems +=
-            `
-    
-                <li class="small-image-item active">
-                    <img class="small-img" src=${img.url} alt="small" data-index=${index}>
-                </li>
-    
-            `
-        }
-        else
-        {
-            smallImgListItems += 
-            `
-            <li class="small-image-item">
-                <img class="small-img" src=${img.url} alt="small" data-index=${index}>
-            </li>
-            `
-        }
-
-
+        smallImgListItems +=
+        `
+        <li class="small-image-item${index == 0 ? " active" : ""}">
+            <img class="small-img" src="${escapeUrl(img.url)}" alt="small" data-index="${index}">
+        </li>
+        `
 
     });
 
     document.querySelector(".small-images-list").innerHTML = smallImgListItems;
-    document.getElementById("previewImage").src = product.Images[0].url;
+    document.getElementById("previewImage").src = safeUrl(product.Images[0].url);
 
     //handle product information
     document.querySelector(".product-name").textContent = product.Name;
     document.querySelector(".product-category").textContent = product.Category;
 
-    //method to calculate rating and know from it how many stars filled will rendered..
-    function calculateRating(value){
-        if(!isNaN(parseInt(value))){ //if number
-            let ratingValue = parseInt(value);
-            if(ratingValue > 250)
-            {
-                ratingValue = 250;
-            }
-
-            let numberOfFillStars = (ratingValue / 50);
-
-            let numberOfFillStarsFloor = Math.floor(numberOfFillStars);
-
-            return numberOfFillStarsFloor;
-
-            
-        }
-        else
-        {
-            return 0;
-        }
-    }
-
     //handle rating stars...
-    let numOfStars = calculateRating(parseInt(product.Rating));
-
-    let stars = ""; 
-
-    for (let index = 0; index < 5; index++) {
-
-        if(numOfStars != 0) {
-            stars += `<img src="/images/Filled_star.png" class="raiting" alt="raiting">`;
-            numOfStars--;
-        }
-        else
-        {
-            stars += `<img src="/images/empty_star.png" class="raiting" alt="raiting">`;
-        }
-    };
-
-    document.querySelector(".product-rating").innerHTML = stars;
+    document.querySelector(".product-rating").innerHTML = renderRatingStars(product.Rating).html;
     
 
     //handle status of product
@@ -124,7 +71,7 @@ const displayTargetProduct = async() => {
     }
 
     //handle small Description
-    document.querySelector(".product-description").innerHTML = product.Description;
+    document.querySelector(".product-description").innerHTML = sanitizeHtml(product.Description);
 
     //handle Price
     document.querySelector(".price-val").textContent = product.Price;
@@ -166,7 +113,7 @@ const displayTargetProduct = async() => {
     document.querySelector(".lastUpdate-product").textContent = (product.LastUpdatedAt) ? moment(product.LastUpdatedAt).format('MMMM Do YYYY, h:mm:ss a') : "No Updated Yet";
     
     //handle description tab
-    document.getElementById("tabProductDescription").innerHTML = product.Description;
+    document.getElementById("tabProductDescription").innerHTML = sanitizeHtml(product.Description);
 
 }
 

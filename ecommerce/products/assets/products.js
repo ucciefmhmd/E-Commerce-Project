@@ -1,6 +1,6 @@
 import { collection, onSnapshot } from "firebase/firestore";
 import { firestore } from "../../../main";
-import { calculateRating } from "../../../adminPanel/shared/helpers";
+import { escapeHtml, escapeUrl, renderRatingStars } from "../../../adminPanel/shared/helpers";
 
 
 //constants
@@ -46,7 +46,7 @@ const displayProducts = () => {
 }
 
 
-//setup products in home 
+//setup products in home
 const setupAllProducts = (products) => {
 
     document.querySelector(".products-container").innerHTML = ``;
@@ -55,44 +55,26 @@ const setupAllProducts = (products) => {
 
     products.forEach((product) => {
 
-
-        //handle rating stars...
-        let numOfStars = calculateRating(parseInt(product.Rating));
-
-        let stars = ""; 
-
-        for (let index = 0; index < 5; index++) {
-
-            if(numOfStars.numberOfFillStarsFloor != 0) {
-                stars += `<img src="/images/Filled_star.png" class="raiting" alt="raiting">`;
-                numOfStars.numberOfFillStarsFloor--;
-            }
-            else
-            {
-                stars += `<img src="/images/empty_star.png" class="raiting" alt="raiting">`;
-            }
-        };
-
         productsCartona +=
         `
         <div class="col-md-3">
 
             <div class="card-product">
-                <div class="img"><img src="${product.Images[0].url}" alt="img" draggable="false" ></div>
+                <div class="img"><img src="${escapeUrl(product.Images[0].url)}" alt="img" draggable="false" ></div>
                 <div class="descOfProduct">
-                    <p class="productCategory">${product.Category}</p>
+                    <p class="productCategory">${escapeHtml(product.Category)}</p>
                     <p class="productName">
-                    <a href="/ecommerce/productDetails/productDetails?id=${product.id}" title="${product.Name}">${product.Name.substring(0 , 60)}...</a>
+                    <a href="/ecommerce/productDetails/productDetails?id=${encodeURIComponent(product.id)}" title="${escapeHtml(product.Name)}">${escapeHtml(product.Name.substring(0 , 60))}...</a>
                     </p>
-                    <p class="rating">${stars}</p>
-                    <p class="productPrice">${product.Price}.00 EPG</p>
+                    <p class="rating">${renderRatingStars(product.Rating).html}</p>
+                    <p class="productPrice">${escapeHtml(product.Price)}.00 EPG</p>
                 </div>
             </div>
 
         </div>
-        
-        
-        `   
+
+
+        `
 
     });
 

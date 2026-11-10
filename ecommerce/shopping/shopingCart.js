@@ -1,6 +1,7 @@
 import { addDoc, collection } from "firebase/firestore";
 import { firestore } from "../../main";
 import { increaseShoppingCartCounter } from "../../adminPanel/products/assets/js/product";
+import { escapeHtml, escapeUrl, getCartTotal, renderPriceHtml } from "../../adminPanel/shared/helpers";
 
 
 //constants
@@ -36,45 +37,47 @@ const getAllProductsFromShopping = () => {
 }
 
 
-//setup wishlist in page
+//setup shopping cart in page
 const setupShopping = (shopping) => {
     document.querySelector(".shoppingContainer").innerHTML = "";
     let shoppingProductCartona = "";
     shopping.forEach(product => {
-        
+
+        const id = escapeHtml(product.id);
+
         shoppingProductCartona += `
-        
+
             <tr>
                 <td>
                     <div class="product-details d-flex justify-content-start align-items-center" style="gap: 10px; padding:0px 30px ;">
-                        <img src="${product.Images[0].url}" alt="" class="img-thumbnail" style="width: 50px; height: 50px; border-radius: 50%;">
+                        <img src="${escapeUrl(product.Images[0].url)}" alt="" class="img-thumbnail" style="width: 50px; height: 50px; border-radius: 50%;">
                         <div class="product-info">
-                            <a href="/ecommerce/productDetails/productDetails?id=${product.id}" class="product-name" title="${product.Name}">${product.Name.substring(0 , 50)}...</a>
-                            <small class="product-category text-muted">${product.Category}</small>
+                            <a href="/ecommerce/productDetails/productDetails?id=${encodeURIComponent(product.id)}" class="product-name" title="${escapeHtml(product.Name)}">${escapeHtml(product.Name.substring(0 , 50))}...</a>
+                            <small class="product-category text-muted">${escapeHtml(product.Category)}</small>
                         </div>
                     </div>
                 </td>
                 <td>
-                    ${product.HasDiscount ? ` <span style="text-decoration: line-through; color:#F00">${product.Price}.00 EPG</span> <span style="color:#080">${getPriceAfterDiscount(product.Price , product.DiscountVal)}.00EPG</span>` :`<span style="">${product.Price}.00 EPG</span>`}
+                    ${renderPriceHtml(product)}
                 </td>
                 <td>
                 <div class="quantity-control d-flex justify-content-center align-items-center" >
-                    <span class="quentity-increament d-flex justify-content-center align-items-center" data-id="${product.id}">
+                    <span class="quentity-increament d-flex justify-content-center align-items-center" data-id="${id}">
                         +
                     </span>
                     <span class="quantity-counter">
-                        ${product.quantityOrder}
+                        ${escapeHtml(product.quantityOrder)}
                     </span>
-                    <span class="quentity-decreament d-flex justify-content-center align-items-center" data-id="${product.id}" >
+                    <span class="quentity-decreament d-flex justify-content-center align-items-center" data-id="${id}" >
                         -
                     </span>
                 </div>
             </td>
                 <td class="Actions">
-                    <button class="btn btn-danger btn-sm js-delete-shopping" data-id="${product.id}">Delete</button>
+                    <button class="btn btn-danger btn-sm js-delete-shopping" data-id="${id}">Delete</button>
                 </td>
             </tr>
-        
+
         `
 
 
@@ -110,27 +113,11 @@ const deleteFromShopping = () => {
 
 }
 
-//handle total Price 
+//handle total Price (computed in the browser; see README "Security limitations")
 const totalPrice = () => {
-    let total = 0;
+    const total = getCartTotal(shopping);
 
-    shopping.forEach((product) => {
-
-        let productPrice = product.Price;
-
-        if(product.HasDiscount){
-            productPrice = getPriceAfterDiscount(product.Price , product.DiscountVal);
-        }
-
-        let productQO = product.quantityOrder;
-
-        let totalForProduct = parseInt(productQO) * parseInt(productPrice);
-
-        total += parseFloat(totalForProduct);
-
-    });
-
-    document.querySelector(".subtotal-span").innerHTML = total + ".00" + "EPG";
+    document.querySelector(".subtotal-span").textContent = total + ".00" + "EPG";
     return total;
 }
 
@@ -188,15 +175,6 @@ const counterControl = () => {
 
 }
 
-//handle price after discount
-const getPriceAfterDiscount = (productPrice , disValue) => {
-    let discountValue = parseInt(disValue);
-    let discountValuePercentage = (discountValue / 100);
-    let discountValueAfterSale = (discountValuePercentage * productPrice);
-    let currentPriceAfterDiscount = (productPrice - discountValueAfterSale);
-    productPrice = currentPriceAfterDiscount;
-    return productPrice;
-}
 
 
 //handle checkout btn 
